@@ -1,53 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="css/index.css" />
-    <title>Ecommerce</title>
-</head>
+<?php
+
+$title = "Trang chủ";
+include_once('components/import_header.php');
+
+?>
 
 <body>
-    <header>
-        <div class="d-flex flex-column flex-md-row  px-3 pt-3 px-md-4  bg-white border-bottom box-shadow">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-2">
-                        <img src="assets/images/logo.png" width="150" height="50" />
-                    </div>
-                    <div class="col-8">
-                        <nav class="menu">
-                            <ul>
-                                <li><a class="mr-4 ml-4 text-dark" href="#">Shop</a></li>
-                                <li><a class="mr-4 ml-4 text-dark" href="#">About</a></li>
-                                <li> <a class="mr-4 ml-4 text-dark" href="#">Contact</a></li>
-                                <li><a class="mr-4 ml-4 text-dark" href="#">Cart</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                    <div class="col-2">
-                        <nav class="menu ">
-                            <ul>
-                                <li>
-                                    <a class="ml-2 text-dark" href="#">
-                                        <i class="bi bi-heart" style="font-size: 1.5em;">
-                                        </i>
-                                    </a>
-                                </li>
-                                <li><a class="ml-2 text-dark" href="#"><img src="assets/images/img_avatar.png"
-                                            class="rounded-circle" width="40" height="40"></a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
+    <?php include_once('components/header.php');  ?>
     <section>
         <div class="container-fluid px-2">
             <div class="row">
@@ -57,36 +19,31 @@
                             <strong class="mb-5">Loại sản phẩm</strong>
 
                             <div class="custom-control custom-checkbox mt-2 mb-3">
-                                <input type="checkbox" class="custom-control-input" id="customCheckBox1"
-                                    name="checkbox1">
+                                <input type="checkbox" class="custom-control-input" id="customCheckBox1" name="checkbox1">
                                 <label class="custom-control-label" for="customCheckBox1">
                                     Custom checkbox
                                 </label>
                             </div>
                             <div class="custom-control custom-checkbox mt-2 mb-3">
-                                <input type="checkbox" class="custom-control-input" id="customCheckBox2"
-                                    name="checkbox2">
+                                <input type="checkbox" class="custom-control-input" id="customCheckBox2" name="checkbox2">
                                 <label class="custom-control-label" for="customCheckBox2">
                                     Custom checkbox
                                 </label>
                             </div>
                             <div class="custom-control custom-checkbox mt-2 mb-3">
-                                <input type="checkbox" class="custom-control-input" id="customCheckBox3"
-                                    name="checkbox3">
+                                <input type="checkbox" class="custom-control-input" id="customCheckBox3" name="checkbox3">
                                 <label class="custom-control-label" for="customCheckBox3">
                                     Custom checkbox
                                 </label>
                             </div>
                             <div class="custom-control custom-checkbox mt-2 mb-3">
-                                <input type="checkbox" class="custom-control-input" id="customCheckBox4"
-                                    name="checkbox4">
+                                <input type="checkbox" class="custom-control-input" id="customCheckBox4" name="checkbox4">
                                 <label class="custom-control-label" for="customCheckBox4">
                                     Custom checkbox
                                 </label>
                             </div>
                             <div class="custom-control custom-checkbox mt-2 mb-3">
-                                <input type="checkbox" class="custom-control-input" id="customCheckBox5"
-                                    name="checkbox5">
+                                <input type="checkbox" class="custom-control-input" id="customCheckBox5" name="checkbox5">
                                 <label class="custom-control-label" for="customCheckBox5">
                                     Custom checkbox
                                 </label>
@@ -134,21 +91,16 @@
                                 <div class="form-row">
                                     <div class="col-lg-6 mr-3 ">
                                         <div class="input-group search-group">
-                                            <span class="input-group-append prefix-search-icon"
-                                                style="background-color: var(--secondary-color);">
+                                            <span class="input-group-append prefix-search-icon" style="background-color: var(--secondary-color);">
                                                 <div class="input-group-text bg-transparent border-0  pl-4 py-2">
                                                     <i class="bi bi-search"></i>
                                                 </div>
                                             </span>
-                                            <input class="form-control py-2 border-0 shadow-none input-search py-4"
-                                                type="text" placeholder="Search..." id="example-search-input" />
-                                            <span class="input-group-append suffix-search-icon"
-                                                style="background-color: var(--secondary-color);">
+                                            <input class="form-control py-2 border-0 shadow-none input-search py-4" type="text" placeholder="Search..." id="example-search-input" />
+                                            <span class="input-group-append suffix-search-icon" style="background-color: var(--secondary-color);">
                                                 <div class="input-group-text bg-transparent border-0  px-4 py-2">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                                        fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                                                        <path
-                                                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z">
                                                         </path>
                                                     </svg>
                                                 </div>
@@ -203,11 +155,10 @@
                         <div class="col-lg-3 col-md-12 mb-4">
                             <div class="card card-ecommerce">
                                 <div class="view overlay">
-                                    <img src="assets/images/products/product-detail-1.jpg" class="img-fluid" alt="">
+                                    <img src="<?php echo $host; ?>assets/images/products/product-detail-1.jpg" class="img-fluid" alt="">
                                 </div>
                                 <div class="card-body">
-                                    <h5 class="card-title mb-1"><strong><a href="detail_product.html"
-                                                class="dark-grey-text">Apple Watch 10 Pro 2021</a></strong></h5>
+                                    <h5 class="card-title mb-1"><strong><a href="<?php echo $host; ?>detail_product.php" class="dark-grey-text">Apple Watch 10 Pro 2021</a></strong></h5>
                                     <span class="badge badge-danger mb-2">bestseller</span>
                                     <!-- Rating -->
                                     <!-- <ul class="rating">
@@ -219,9 +170,8 @@
                                     </ul> -->
                                     <div class="card-footer pb-0">
                                         <div class="d-flex align-items-center justify-content-around row mb-0">
-                                            <strong>400.000 đ</strong>
-                                            <button type="button" class="btn medium-secondary-btn"
-                                                style="background-color: var(--primary-color) !important; color: white">
+                                            <strong>18.691 đ</strong>
+                                            <button type="button" class="btn medium-secondary-btn" style="background-color: var(--primary-color) !important; color: white">
                                                 Add to cart
                                             </button>
 
@@ -241,8 +191,7 @@
                             <ul class="pagination pagination-circle pg-blue mb-0">
 
                                 <!--First-->
-                                <li class="page-item disabled clearfix d-none d-md-block"><a
-                                        class="page-link waves-effect waves-effect">First</a></li>
+                                <li class="page-item disabled clearfix d-none d-md-block"><a class="page-link waves-effect waves-effect">First</a></li>
 
                                 <!--Arrow left-->
                                 <li class="page-item disabled">
@@ -268,8 +217,7 @@
                                 </li>
 
                                 <!--First-->
-                                <li class="page-item clearfix d-none d-md-block"><a
-                                        class="page-link waves-effect waves-effect">Last</a></li>
+                                <li class="page-item clearfix d-none d-md-block"><a class="page-link waves-effect waves-effect">Last</a></li>
 
                             </ul>
                         </nav>
@@ -289,14 +237,7 @@
 
 
 
-
-    <!-- https://mdbootstrap.com/previews/templates/e-commerce/html/category/category-v1.html -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
-        crossorigin="anonymous"></script>
+    <?php include_once('components/import_footer.php');  ?>
 </body>
 
 </html>

@@ -2,53 +2,16 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-    integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-  <!-- <link rel="stylesheet" href="css/mdb-pro.min.css"> -->
-  <link rel="stylesheet" href="css/index.css" />
-  <title>Ecommerce</title>
+  <?php
+
+  $title = "Trang chủ";
+  include_once('components/import_header.php');
+
+  ?>
 </head>
 
 <body>
-  <header>
-    <div class="d-flex flex-column flex-md-row  px-3 pt-3 px-md-4  bg-white border-bottom box-shadow">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-2">
-            <img src="assets/images/logo.png" width="150" height="50" />
-          </div>
-          <div class="col-8">
-            <nav class="menu">
-              <ul>
-                <li><a class="mr-4 ml-4 text-dark" href="#">Shop</a></li>
-                <li><a class="mr-4 ml-4 text-dark" href="#">About</a></li>
-                <li> <a class="mr-4 ml-4 text-dark" href="#">Contact</a></li>
-                <li><a class="mr-4 ml-4 text-dark" href="#">Cart</a></li>
-              </ul>
-            </nav>
-          </div>
-          <div class="col-2">
-            <nav class="menu ">
-              <ul>
-                <li>
-                  <a class="ml-2 text-dark" href="#">
-                    <i class="bi bi-heart" style="font-size: 1.5em;">
-                    </i>
-                  </a>
-                </li>
-                <li><a class="ml-2 text-dark" href="#"><img src="assets/images/img_avatar.png" class="rounded-circle"
-                      width="40" height="40"></a></li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
+  <?php include_once('components/header.php');  ?>
 
 
   <section class="mt-5 mb-4">
@@ -64,22 +27,21 @@
               <div class="row mb-4">
                 <div class="col-md-5 col-lg-3 col-xl-3">
                   <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
-                    <img class="img-fluid w-100" src="assets/images/products/product-detail-1.jpg" alt="Sample">
+                    <img class="img-fluid w-100" src="<?php echo $host; ?>assets/images/products/product-detail-1.jpg" alt="Sample">
                   </div>
                 </div>
                 <div class="col-md-7 col-lg-9 col-xl-9">
                   <div class="row justify-content-between">
                     <div class="col-lg-8">
-                      <h5 class="mb-3">Apple Watch 10 Pro 2021</h5>
-                      <p class="mb-2 text-muted small"><strong>LOẠI: </strong> Đồng hồ</p>
+                      <h5 class="mb-3">Apple Watch S6 LTE 44mm</h5>
+                      <p class="mb-2 text-muted small"><strong>LOẠI: </strong> Đồng hồ thông minh</p>
                       <p class="mb-2 text-muted small"><strong>KHO: </strong> 93 sản phẩm</p>
                       <p class="mb-3 text-muted small"><strong>Tình trạng: </strong> Còn hàng</p>
                     </div>
                     <div class="col-lg-4">
                       <div class="row w-100 justify-content-center">
                         <div class="input-group my-2">
-                          <button class="btn btn-default border rounded-0 mb-2"
-                            onclick="this.parentNode.querySelector('input[type=number]').stepDown()">-</button>
+                          <button class="btn btn-default border rounded-0 mb-2" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">-</button>
                           <input class="form-control rounded-0 quantity-input" type="number" value="1" min="0" />
                           <button class="btn btn-default border rounded-0 mb-2" onclick="
                             this.parentNode.querySelector('input[type=number]').stepUp()">+</button>
@@ -92,7 +54,7 @@
                       <a href="#!" type="button" class="card-link-secondary small text-uppercase mr-3">
                         <i class="bi bi-trash-fill"></i> Xoá khỏi giỏ hàng </a>
                     </div>
-                    <p class="mb-0"><span><strong>$17.99</strong></span></p>
+                    <p class="mb-0"><span><strong>18.691.000 đ</strong></span></p>
                   </div>
                 </div>
               </div>
@@ -113,7 +75,7 @@
               <ul class="list-group list-group-flush">
                 <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
                   Giá tạm tính
-                  <span>$53.98</span>
+                  <span>18.691.000 đ</span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                   Phí vận chuyển
@@ -123,7 +85,7 @@
                   <div>
                     <strong>Tổng cộng</strong>
                   </div>
-                  <span><strong>$53.98</strong></span>
+                  <span><strong>18.691.000 đ</strong></span>
                 </li>
               </ul>
 
@@ -147,14 +109,7 @@
 
 
 
-  <!-- https://mdbootstrap.com/previews/templates/e-commerce/html/category/category-v1.html -->
-  <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
-    crossorigin="anonymous"></script>
+  <?php include_once('components/import_footer.php');  ?>
 
 </body>
 
