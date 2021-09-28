@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+    integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="css/index.css" />
+  <title>Ecommerce</title>
+</head>
+
+<body>
+  <header>
+    <div class="d-flex flex-column flex-md-row  px-3 pt-3 px-md-4  bg-white border-bottom box-shadow">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-2">
+            <img src="assets/images/logo.png" width="150" height="50" />
+          </div>
+          <div class="col-8">
+            <nav class="menu">
+              <ul>
+                <li><a class="mr-4 ml-4 text-dark" href="#">Shop</a></li>
+                <li><a class="mr-4 ml-4 text-dark" href="#">About</a></li>
+                <li> <a class="mr-4 ml-4 text-dark" href="#">Contact</a></li>
+                <li><a class="mr-4 ml-4 text-dark" href="#">Cart</a></li>
+              </ul>
+            </nav>
+          </div>
+          <div class="col-2">
+            <nav class="menu ">
+              <ul>
+                <li>
+                  <a class="ml-2 text-dark" href="#">
+                    <i class="bi bi-heart" style="font-size: 1.5em;">
+                    </i>
+                  </a>
+                </li>
+                <li><a class="ml-2 text-dark" href="#"><img src="assets/images/img_avatar.png" class="rounded-circle"
+                      width="40" height="40"></a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+  <section>
+    <div class="container mt-5">
+      <div class="row mb-5">
+        <!-- PRODUCT SLIDER-->
+        <div class="col-lg-5 mb-5">
+          <div class="row m-sm-0">
+            <div class="col-sm-12 order-1 order-sm-2">
+              <div class="owl-carousel product-slider owl-loaded owl-drag" data-slider-id="1">
+
+                <div class="owl-stage-outer">
+                  <div class="owl-stage"
+                    style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 415px;">
+                    <div class="owl-item active" style="width: 414.995px;"><a class="d-block"
+                        href="assets/images/products/product-detail-1.jpg" data-lightbox="product" title="BIG NORON">
+                        <img class="img-fluid" id="anhminhhoa" src="assets/images/products/product-detail-1.jpg"
+                          alt="anhsanpham"></a></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- PRODUCT DETAILS-->
+        <div class="col-lg-7">
+          <h1 id="name-product">BIG NORON</h1>
+          <p class="text-muted lead " id="price-product">430000 đ</p>
+          <p class="text-small mb-4">Nhẫn bạc cao cấp được thiết kế theo phong cách chất lừ sẽ giúp đôi tay của bạn thêm
+            nổi bật. Một tí cách điệu cho bản thân thêm độc đáo . </p>
+          <!-- Form add to cart-->
+          <form action="" method="post">
+            <div class="row align-items-stretch mb-2">
+              <div class="col-lg-6 col-md-6 col-sm-6 pr-sm-0">
+                <div class="border d-flex align-items-center justify-content-between py-1 px-3 bg-white border-white">
+                  <span class="small text-uppercase text-gray mr-2 no-select"><strong>Số lượng</strong></span>
+                  <div class="quantity ">
+                    <a class="dec-btn p-0"><i class="fas fa-caret-left"></i></a>
+                    <input name="quantity" class="form-control border-0 shadow-0 p-0 " type="number" id="num-cart-input"
+                      value="1">
+                    <a class="inc-btn p-0"><i class="fas fa-caret-right"></i></a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-5 col-sm-5 pl-sm-0">
+                <!-- <button name="add-to-cart" type="submit"
+                  class=" btn btn-dark btn-sm btn-block h-100 d-flex align-items-center justify-content-center px-0"
+                  id="add-cart-btn">Thêm vào giỏ hàng
+                </button> -->
+                <button type="button" class=" py-2 btn medium-secondary-btn active ">Thêm
+                  vào giỏ hàng</button>
+              </div>
+            </div>
+            <input type="text" name="id" value="100000" hidden="">
+            <input type="text" name="name" value="BIG NORON" hidden="">
+            <input type="text" name="img" value="img/big-noron.jpg" hidden="">
+            <input type="text" name="price" value="430000" hidden="">
+            <input type="text" name="stored" value="93" hidden="">
+          </form>
+          <ul class="list-unstyled small d-inline-block">
+            <li class="px-3 py-2 mb-1 bg-white text-muted"><strong class="text-uppercase text-dark">LOẠI SẢN
+                PHẨM:</strong><span class="reset-anchor ml-2" href="#">Nhẫn bạc</span></li>
+            <li class="px-3 py-2 mb-1 bg-white"><strong class="text-uppercase">CÒN LẠI:</strong><span
+                class="ml-2 text-muted"><strong>93 Sản phẩm</strong></span></li>
+            <li class="px-3 py-2 mb-1 bg-white text-muted"><strong class="text-uppercase text-dark">TÌNH TRẠNG:</strong>
+              <span class="reset-anchor ml-2" href="#">
+                Còn hàng </span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+      <div class="bg-light px-4 py-3">
+        <div class="row align-items-center text-center">
+          <div class="col-md-6 col-sm-6 mb-3 mb-md-0 text-md-left"><a class="btn btn-link p-0 text-dark btn-sm"
+              href="index.html"><i class="fas fa-long-arrow-alt-left mr-2"> </i>Tiếp tục mua sắm</a></div>
+          <div class="col-md-6 col-sm-6 text-md-right"><a class="btn btn-outline-dark btn-sm" href="gio-hang.php">Đi đến
+              giỏ hàng<i class="fas fa-long-arrow-alt-right ml-2"></i></a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+  <!-- https://mdbootstrap.com/previews/templates/e-commerce/html/category/category-v1.html -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
