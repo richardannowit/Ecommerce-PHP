@@ -5,7 +5,26 @@
   <?php
 
   $title = "Trang chủ";
+  require('connect.php');
+  require('repository.php');
   include_once('components/import_header.php');
+
+  $id = -1;
+  if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+  }
+
+  if ($id == -1) {
+    header('Location: index.php');
+  }
+
+  $detail_query = "SELECT * FROM hanghoa JOIN loaihanghoa ON hanghoa.MaLoaiHang=loaihanghoa.MaLoaiHang WHERE hanghoa.MSHH=" . $id;
+  $product_details = getList($conn, $detail_query);
+  if (count($product_details) == 0) {
+    header('Location: index.php');
+  }
+
+  $product_detail = $product_details[0];
 
   ?>
 </head>
@@ -35,9 +54,9 @@
         </div>
         <!-- PRODUCT DETAILS-->
         <div class="col-lg-7">
-          <h1 id="name-product">Apple Watch S6 LTE 44mm</h1>
-          <p class="text-muted lead " id="price-product">18.691.000 đ</p>
-          <p class="text-small mb-4">Chiếc Apple Watch S6 LTE sở hữu dây đeo sáng bóng, chống gỉ sét tốt, màn hình tràn viền mang lại sự trải nghiệm sắc nét, rõ ràng. Phần thân máy có kết cấu chắc chắn, kính cường lực chống trầy xước tốt, không ngại những va chạm thông thường. Mặt đồng hồ với kích thước 1.78 inch giúp hiển thị thông tin rõ ràng hơn, đem lại cho bạn sự hài lòng khi đeo mẫu đồng hồ phiên bản 2020 này trên tay.</p>
+          <h1 id="name-product"><?php echo $product_detail['TenHH']; ?></h1>
+          <p class="text-muted lead " id="price-product"><?php echo $product_detail['Gia']; ?></p>
+          <p class="text-small mb-4"><?php echo $product_detail['QuyCach']; ?></p>
           <!-- Form add to cart-->
           <form action="" method="post">
             <div class="row align-items-center mb-2 align-content-center">
@@ -74,11 +93,19 @@
           </form>
           <ul class="list-unstyled small d-inline-block">
             <li class="px-3 py-2 mb-1 bg-white text-muted"><strong class="text-uppercase text-dark">LOẠI SẢN
-                PHẨM:</strong><span class="reset-anchor ml-2" href="#">Đồng hồ thông minh</span></li>
-            <li class="px-3 py-2 mb-1 bg-white"><strong class="text-uppercase">CÒN LẠI:</strong><span class="ml-2 text-muted"><strong>93 Sản phẩm</strong></span></li>
+                PHẨM:</strong><span class="reset-anchor ml-2" href="#"><?php echo $product_detail['TenLoaiHang']; ?></span></li>
+            <li class="px-3 py-2 mb-1 bg-white">
+              <strong class="text-uppercase">CÒN LẠI:</strong>
+              <span class="ml-2 text-muted">
+                <strong>
+                  <?php echo $product_detail['SoLuongHang']; ?> sản phẩm
+                </strong>
+              </span>
+            </li>
             <li class="px-3 py-2 mb-1 bg-white text-muted"><strong class="text-uppercase text-dark">TÌNH TRẠNG:</strong>
               <span class="reset-anchor ml-2" href="#">
-                Còn hàng </span>
+                <?php echo $product_detail['SoLuongHang'] > 0 ? "Còn hàng" : "Hết hàng"; ?>
+              </span>
             </li>
           </ul>
         </div>

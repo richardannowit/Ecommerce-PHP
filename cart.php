@@ -54,7 +54,7 @@
                       <a href="#!" type="button" class="card-link-secondary small text-uppercase mr-3">
                         <i class="bi bi-trash-fill"></i> Xoá khỏi giỏ hàng </a>
                     </div>
-                    <p class="mb-0"><span><strong>18.691.000 đ</strong></span></p>
+                    <p class="mb-0"><span><strong>18.691.000 VNĐ</strong></span></p>
                   </div>
                 </div>
               </div>
@@ -75,7 +75,7 @@
               <ul class="list-group list-group-flush">
                 <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
                   Giá tạm tính
-                  <span>18.691.000 đ</span>
+                  <span>18.691.000 VNĐ</span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                   Phí vận chuyển
@@ -85,13 +85,15 @@
                   <div>
                     <strong>Tổng cộng</strong>
                   </div>
-                  <span><strong>18.691.000 đ</strong></span>
+                  <span><strong>18.691.000 VNĐ</strong></span>
                 </li>
               </ul>
 
               <div class="row mt-2">
                 <div class="col-lg-12">
-                  <button type="button" class="btn medium-primary-btn btn-block">Đặt hàng</button>
+                  <a href="<?php echo $host; ?>checkout.php">
+                    <button type="button" class="btn medium-primary-btn btn-block">Đặt hàng</button>
+                  </a>
                 </div>
               </div>
 
