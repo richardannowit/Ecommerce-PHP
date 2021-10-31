@@ -34,6 +34,7 @@
 
 
   <section>
+    <input type="hidden" id="product_id" value="<?php echo $product_detail['MSHH']; ?>" />
     <div class="container mt-5">
       <div class="row mb-5">
         <!-- PRODUCT SLIDER-->
@@ -55,7 +56,7 @@
         <!-- PRODUCT DETAILS-->
         <div class="col-lg-7">
           <h1 id="name-product"><?php echo $product_detail['TenHH']; ?></h1>
-          <p class="text-muted lead " id="price-product"><?php echo $product_detail['Gia']; ?></p>
+          <p class="text-muted lead " id="price-product"><?php echo number_format($product_detail['Gia']); ?> VNĐ</p>
           <p class="text-small mb-4"><?php echo $product_detail['QuyCach']; ?></p>
           <!-- Form add to cart-->
           <form action="" method="post">
@@ -69,10 +70,10 @@
               <div class="col-lg-3 col-md-3 col-sm-3 pr-sm-0 mr-3">
                 <div class="row w-100 justify-content-center">
                   <div class="input-group my-2">
-                    <button class="btn btn-default border rounded-0 mb-2" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">-</button>
-                    <input class="form-control rounded-0 quantity-input" type="number" value="1" min="0" />
-                    <button class="btn btn-default border rounded-0 mb-2" onclick="
-                            this.parentNode.querySelector('input[type=number]').stepUp()">+</button>
+                    <button type="button" class="btn btn-default border rounded-0 mb-2" onclick="document.getElementById('quantity').stepDown()">-</button>
+                    <input class="form-control rounded-0 quantity-input" id="quantity" type="number" value="1" min="1" max="<?php echo $product_detail['SoLuongHang']; ?>" />
+                    <button type="button" class="btn btn-default border rounded-0 mb-2" onclick="
+                            document.getElementById('quantity').stepUp()">+</button>
                   </div>
                 </div>
               </div>
@@ -81,15 +82,10 @@
                   class=" btn btn-dark btn-sm btn-block h-100 d-flex align-items-center justify-content-center px-0"
                   id="add-cart-btn">Thêm vào giỏ hàng
                 </button> -->
-                <button type="button" class=" py-2 btn medium-secondary-btn active ">Thêm
+                <button type="button" id="add_to_cart" class=" py-2 btn medium-secondary-btn active ">Thêm
                   vào giỏ hàng</button>
               </div>
             </div>
-            <input type="text" name="id" value="100000" hidden="">
-            <input type="text" name="name" value="BIG NORON" hidden="">
-            <input type="text" name="img" value="img/big-noron.jpg" hidden="">
-            <input type="text" name="price" value="430000" hidden="">
-            <input type="text" name="stored" value="93" hidden="">
           </form>
           <ul class="list-unstyled small d-inline-block">
             <li class="px-3 py-2 mb-1 bg-white text-muted"><strong class="text-uppercase text-dark">LOẠI SẢN
@@ -120,6 +116,9 @@
       </div>
     </div>
   </section>
+
+
+
 
 
 
