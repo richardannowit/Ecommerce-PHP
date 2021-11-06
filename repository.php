@@ -8,3 +8,8 @@ function getList($conn, $sql)
     }
     return $list;
 }
+
+function db_insert($conn, $sql)
+{
+    return $conn->query($sql) ? $conn->insert_id : 0;
+}

@@ -1,4 +1,6 @@
 <?php include_once('../domain.php');
+require('../connect.php');
+require('../repository.php');
 ?>
 
 <head>
@@ -13,9 +15,11 @@
     <link rel="stylesheet" href="css/vendor.bundle.base.css">
     <link rel="stylesheet" href="css/dataTables.bootstrap4.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/sweetalert2.min.css">
     <script defer src="js/font-awesome.js"></script>
     <script defer src="js/vendor.bundle.base.js"></script>
     <script defer src="js/jquery.dataTables.js"></script>
     <script defer src="js/dataTables.bootstrap4.js"></script>
     <script defer src="js/index.js"></script>
+    <script src="js/sweetalert.min.js"></script>
 </head>

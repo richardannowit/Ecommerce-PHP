@@ -4,10 +4,10 @@
       <div class="card-body">
         <div class="d-flex justify-content-between mb-3">
           <p class="card-title my-auto">Danh sách nhân viên</p>
-          <button type="button" class="btn btn-primary btn-block">
+          <a href="add_nhanvien.php" class="btn btn-primary btn-block">
             <i class="ti-plus mr-4"></i>
             &nbsp;&nbsp;Thêm nhân viên
-          </button>
+          </a>
         </div>
         <div class="row">
           <div class="col-12">

@@ -1,3 +1,11 @@
+<?php
+$category_query = "SELECT * FROM loaihanghoa";
+$category_list = getList($conn, $category_query);
+
+
+?>
+
+
 <div class="row">
   <div class="col-md-12 grid-margin stretch-card">
     <div class="card">
@@ -24,34 +32,22 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr class="odd">
-                      <td>0000001</td>
-                      <td>Điện thoại</td>
-                      <td>
-                        <button type="button" class="btn btn-primary btn-icon btn-rounded px-0">
-                          <i class="ti-pencil-alt mx-0"></i>
-                        </button>
-                        <button type="button" class="btn btn-danger btn-rounded btn-icon px-0" style="color: white; margin-left: 10px;">
-                          <i class="ti-trash mx-0"></i>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr class="even">
-                      <td>0000002</td>
-                      <td>Laptop</td>
-                      <td>
-                        <button type="button" class="btn btn-primary btn-icon btn-rounded px-0">
-                          <i class="ti-pencil-alt mx-0"></i>
-                        </button>
-                        <button type="button" class="btn btn-danger btn-rounded btn-icon px-0" style="color: white; margin-left: 10px;">
-                          <i class="ti-trash mx-0"></i>
-                        </button>
-                      </td>
-                    </tr>
-
-
-
-
+                    <?php
+                    foreach ($category_list as $row) {
+                      ?>
+                      <tr>
+                        <td><?php echo $row["MaLoaiHang"]; ?></td>
+                        <td><?php echo $row["TenLoaiHang"]; ?></td>
+                        <td>
+                          <button type="button" class="btn btn-primary btn-icon btn-rounded px-0">
+                            <i class="ti-pencil-alt mx-0"></i>
+                          </button>
+                          <button type="button" onclick="delete_category();" class="btn btn-danger btn-rounded btn-icon px-0" style="color: white; margin-left: 10px;">
+                            <i class="ti-trash mx-0"></i>
+                          </button>
+                        </td>
+                      </tr>
+                    <?php } ?>
                   </tbody>
                 </table>
               </div>
@@ -62,3 +58,29 @@
     </div>
   </div>
 </div>
+
+
+<script>
+  function delete_category() {
+    Swal.fire({
+      title: 'Xác nhận xoá?',
+      text: "Bạn có chắc chắn muốn xoá nó không!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Xác nhận',
+      cancelButtonText: 'Huỷ'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        ).then((res) => {
+          console.log("Da xoa");
+        })
+      }
+    })
+  }
+</script>

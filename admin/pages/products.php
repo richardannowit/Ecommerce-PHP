@@ -1,13 +1,22 @@
+<?php
+$product_query = "SELECT * FROM hanghoa AS h LEFT JOIN loaihanghoa AS c ON c.MaLoaiHang=h.MaLoaiHang";
+$product_list = getList($conn, $product_query);
+
+
+?>
+
 <div class="row">
   <div class="col-md-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
         <div class="d-flex justify-content-between mb-3">
           <p class="card-title my-auto">Danh sách hàng hoá</p>
-          <button type="button" class="btn btn-primary btn-block">
-            <i class="ti-plus mr-4"></i>
-            &nbsp;&nbsp;Thêm hàng hoá
-          </button>
+          <a href="add_product.php">
+            <button type="button" class="btn btn-primary btn-block">
+              <i class="ti-plus mr-4"></i>
+              &nbsp;&nbsp;Thêm hàng hoá
+            </button>
+          </a>
         </div>
         <div class="row">
           <div class="col-12">
@@ -26,40 +35,26 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr class="odd">
-                      <td>0000001</td>
-                      <td>Iphone 11 Pro</td>
-                      <td>Điện thoại</td>
-                      <td>10</td>
-                      <td>1.000.000 VNĐ</td>
-                      <td>Đang bán</td>
-                      <td>
-                        <button type="button" class="btn btn-primary btn-icon btn-rounded px-0">
-                          <i class="ti-pencil-alt mx-0"></i>
-                        </button>
-                        <button type="button" class="btn btn-danger btn-rounded btn-icon px-0" style="color: white; margin-left: 10px;">
-                          <i class="ti-trash mx-0"></i>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr class="even">
-                      <td>0000002</td>
-                      <td>Dell XPS</td>
-                      <td>Laptop</td>
-                      <td>10</td>
-                      <td>1.000.000 VNĐ</td>
-                      <td>Đang bán</td>
-                      <td>
-                        <button type="button" class="btn btn-primary btn-icon btn-rounded px-0">
-                          <i class="ti-pencil-alt mx-0"></i>
-                        </button>
-                        <button type="button" class="btn btn-danger btn-rounded btn-icon px-0" style="color: white; margin-left: 10px;">
-                          <i class="ti-trash mx-0"></i>
-                        </button>
-                      </td>
-                    </tr>
-
-
+                    <?php
+                    foreach ($product_list as $row) {
+                      ?>
+                      <tr>
+                        <td><?php echo $row["MSHH"]; ?></td>
+                        <td><?php echo $row["TenHH"]; ?></td>
+                        <td><?php echo $row["TenLoaiHang"]; ?></td>
+                        <td><?php echo $row["SoLuongHang"]; ?></td>
+                        <td><?php echo number_format($row["Gia"]); ?> VNĐ</td>
+                        <td><?php echo $row["SoLuongHang"] > 0 ? "Đang bán" : "Hết hàng"; ?></td>
+                        <td>
+                          <button type="button" class="btn btn-primary btn-icon btn-rounded px-0">
+                            <i class="ti-pencil-alt mx-0"></i>
+                          </button>
+                          <button type="button" class="btn btn-danger btn-rounded btn-icon px-0" style="color: white; margin-left: 10px;">
+                            <i class="ti-trash mx-0"></i>
+                          </button>
+                        </td>
+                      </tr>
+                    <?php } ?>
                   </tbody>
                 </table>
               </div>
