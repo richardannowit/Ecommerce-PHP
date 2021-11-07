@@ -44,11 +44,17 @@ $product_list = getList($conn, $product_query);
                         <td><?php echo $row["TenLoaiHang"]; ?></td>
                         <td><?php echo $row["SoLuongHang"]; ?></td>
                         <td><?php echo number_format($row["Gia"]); ?> VNĐ</td>
-                        <td><?php echo $row["SoLuongHang"] > 0 ? "Đang bán" : "Hết hàng"; ?></td>
+                        <td class="font-weight-medium">
+                          <div class="badge <?php echo $row["SoLuongHang"] > 0 ? "badge-success" : "badge-danger" ?> ">
+                            <?php echo $row["SoLuongHang"] > 0 ? "Đang bán" : "Hết hàng"; ?>
+                          </div>
+                        </td>
                         <td>
-                          <button type="button" class="btn btn-primary btn-icon btn-rounded px-0">
-                            <i class="ti-pencil-alt mx-0"></i>
-                          </button>
+                          <a href="edit_product.php?id=<?php echo $row['MSHH']; ?>">
+                            <button href="edit_product.php" class="btn btn-primary btn-icon btn-rounded px-0">
+                              <i class="ti-pencil-alt mx-0"></i>
+                            </button>
+                          </a>
                           <button type="button" class="btn btn-danger btn-rounded btn-icon px-0" style="color: white; margin-left: 10px;">
                             <i class="ti-trash mx-0"></i>
                           </button>

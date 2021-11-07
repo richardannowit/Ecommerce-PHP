@@ -11,7 +11,14 @@ include_once('components/import_header.php');
 
 $category_params = array();
 $sort_type = "price_asc";
+$itemsPerPage = 8;
 $search = "";
+$page = 1;
+$offset = 0;
+if (isset($_GET['page'])) {
+  $page = $_GET['page'];
+}
+$offset = ($page - 1) * $itemsPerPage;
 if (isset($_GET['category'])) {
   $category_params = $_GET['category'];
 }
@@ -22,7 +29,7 @@ if (isset($_GET['search'])) {
   $search = $_GET['search'];
 }
 
-$product_query = "SELECT * FROM hanghoa";
+$product_query = "FROM hanghoa";
 if (count($category_params) > 0) {
   for ($i = 0; $i < count($category_params); $i++) {
     if ($i != 0) {
@@ -51,12 +58,18 @@ if ($sort_type == 'price_desc') {
 } else {
   $product_query = $product_query . " ORDER BY Gia ASC";
 }
-$product_list = getList($conn, $product_query);
+
+
+$product_sql = "SELECT * " . $product_query  . " LIMIT " . $itemsPerPage . " OFFSET " . $offset;
+
+$product_list = getList($conn, $product_sql);
 
 $category_query = "SELECT * FROM loaihanghoa";
 $category_list = getList($conn, $category_query);
 
 
+$count_query = "SELECT count(*) " . $product_query;
+$total_page = ceil(getOne($conn, $count_query) / (float) $itemsPerPage);
 
 ?>
 
@@ -163,6 +176,7 @@ $category_list = getList($conn, $category_query);
             <!-- End Search input -->
 
             <!-- Sort type  -->
+            <input type="hidden" name="sort" value="<?php echo $sort_type; ?>" />
             <div class="row px-4 pb-4">
               <div class="d-flex flex-row px-4">
                 <div class="py-3 pr-4">Sắp xếp theo: </div>
@@ -194,9 +208,14 @@ $category_list = getList($conn, $category_query);
               foreach ($product_list as $row) {
                 ?>
                 <div class="col-lg-3 col-md-12 mb-4">
-                  <div class="card card-ecommerce">
+                  <div class="card card-ecommerce h-100">
                     <div class="view overlay">
-                      <img src="<?php echo $host; ?>assets/images/products/product-detail-1.jpg" class="img-fluid" alt="">
+                      <?php
+                        $image_query = "SELECT * FROM hinhhanghoa WHERE MSHH=" . $row["MSHH"];
+                        $image = getList($conn, $image_query);
+                        ?>
+                      <img src="<?php echo $host; ?>assets/images/products/<?php echo $image[0]["TenHinh"]; ?>" height="250" width="250" class="">
+                      <input type="hidden" id="image_<?php echo $row['MSHH']; ?>" value="<?php echo $image[0]["TenHinh"]; ?>" />
                     </div>
                     <div class="card-body">
                       <h5 class="card-title mb-1">
@@ -215,10 +234,15 @@ $category_list = getList($conn, $category_query);
                                         <li><i class="fas fa-star blue-text"></i></li>
                                         <li><i class="fas fa-star blue-text"></i></li>
                                     </ul> -->
+
+                      <input type="hidden" id="product_id_<?php echo $row['MSHH']; ?>" value="<?php echo $row['MSHH']; ?>" />
+                      <input type="hidden" id="quantity_<?php echo $row['MSHH']; ?>" value="1" />
+                      <input type="hidden" id="conlai_<?php echo $row['MSHH']; ?>" value="<?php echo $row['SoLuongHang']; ?>" />
+
                       <div class="card-footer pb-0">
                         <div class="d-flex align-items-center justify-content-around row mb-0">
                           <strong><?php echo number_format($row["Gia"]); ?> VNĐ</strong>
-                          <button type="button" class="btn medium-secondary-btn" style="background-color: var(--primary-color) !important; color: white">
+                          <button type="button" id="<?php echo $row['MSHH']; ?>" class="btn medium-secondary-btn add_to_cart" style="background-color: var(--primary-color) !important; color: white">
                             Add to cart
                           </button>
 
@@ -239,33 +263,47 @@ $category_list = getList($conn, $category_query);
                 <ul class="pagination pagination-circle pg-blue mb-0">
 
                   <!--First-->
-                  <li class="page-item disabled clearfix d-none d-md-block"><a class="page-link waves-effect waves-effect">First</a></li>
+                  <li class="page-item <?php echo $page == 1 ? "disabled" : ""; ?> clearfix d-none d-md-block">
+                    <button type="submit" name="page" value="1" class="page-link waves-effect waves-effect">
+                      First
+                    </button>
+                  </li>
 
                   <!--Arrow left-->
-                  <li class="page-item disabled">
-                    <a class="page-link waves-effect waves-effect" aria-label="Previous">
+                  <li class="page-item <?php echo $page == 1 ? "disabled" : ""; ?>">
+                    <button type="submit" name="page" value="<?php echo $page - 1; ?>" class="page-link waves-effect waves-effect" aria-label="Previous">
                       <span aria-hidden="true">«</span>
                       <span class="sr-only">Previous</span>
-                    </a>
+                    </button>
                   </li>
 
                   <!--Numbers-->
-                  <li class="page-item active"><a class="page-link waves-effect ">1</a></li>
-                  <li class="page-item "><a class="page-link  waves-effect">2</a></li>
-                  <li class="page-item"><a class="page-link waves-effect ">3</a></li>
-                  <li class="page-item"><a class="page-link waves-effect ">4</a></li>
-                  <li class="page-item"><a class="page-link waves-effect ">5</a></li>
+                  <?php
+                  for ($i = 1; $i <= $total_page; $i++) {
+                    ?>
+                    <li class="page-item <?php echo $page == $i ? "active" : ""; ?> ">
+                      <button type="submit" name="page" value="<?php echo $i; ?>" class="page-link  waves-effect"><?php echo $i; ?>
+                      </button>
+                    </li>
+
+                  <?php
+                  }
+                  ?>
 
                   <!--Arrow right-->
-                  <li class="page-item">
-                    <a class="page-link waves-effect waves-effect" aria-label="Next">
+                  <li class="page-item <?php echo $page == $total_page ? "disabled" : ""; ?>">
+                    <button type="submit" name="page" value="<?php echo $page + 1; ?>" class="page-link waves-effect waves-effect" aria-label="Next">
                       <span aria-hidden="true">»</span>
                       <span class="sr-only">Next</span>
-                    </a>
+                    </button>
                   </li>
 
                   <!--First-->
-                  <li class="page-item clearfix d-none d-md-block"><a class="page-link waves-effect waves-effect">Last</a></li>
+                  <li class="page-item <?php echo $page == $total_page ? "disabled" : ""; ?> clearfix d-none d-md-block">
+                    <button type="submit" name="page" value="<?php echo $total_page; ?>" class="page-link waves-effect waves-effect">
+                      Last
+                    </button>
+                  </li>
 
                 </ul>
               </nav>
@@ -279,14 +317,36 @@ $category_list = getList($conn, $category_query);
       </div>
     </form>
   </section>
-
-
-
-
-
-
-
   <?php include_once('components/import_footer.php');  ?>
+  <script>
+    $(document).ready(function() {
+      $(".add_to_cart").click(function(e) {
+        e.preventDefault();
+        var id = this.id;
+        $.ajax({
+          type: "POST",
+          url: "add_to_cart.php",
+          data: {
+            product_id: $("#product_id_" + id).val(),
+            quantity: $("#quantity_" + id).val(),
+            image: $("#image_" + id).val(),
+            conlai: $("#conlai_" + id).val(),
+            add_to_cart: "Click",
+          },
+          success: function(result) {
+            Snackbar.show({
+              text: result
+            });
+          },
+          error: function(result) {
+            Snackbar.show({
+              text: 'Thêm vào giỏ hàng thất bại.'
+            });
+          }
+        });
+      });
+    });
+  </script>
 </body>
 
 </html>

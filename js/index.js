@@ -27,4 +27,6 @@ $(document).ready(function () {
         addToCart(id, quantity);
         Snackbar.show({ text: 'Thêm vào giỏ hàng thành công.' });
     });
+    let cartFromStorage = JSON.parse(window.localStorage.getItem('cart')) || [];
+    // console.log(cartFromStorage[0]);
 });

@@ -1,3 +1,20 @@
+<?php
+if (session_id() === '')
+  session_start();
+require('connect.php');
+require('repository.php');
+
+$cart = null;
+if (isset($_SESSION['cart'])) {
+  $cart = $_SESSION['cart'];
+}
+
+
+
+$total_price = 0;
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,32 +51,26 @@
                       <!-- Họ tên -->
                       <div class="col-lg-12 form-group">
                         <label class="text-small " for="name">Họ và tên (*)</label>
-                        <input class="form-control" id="name" name="name" type="text" placeholder="Nhập họ và tên"
-                          value="" onblur="CheckName()">
-                      </div>
-                      <div class="col-lg-12 form-group">
-                        <span class="text-danger" id="mess_name">Vui lòng nhập thông tin</span>
+                        <input class="form-control" id="name" name="name" type="text" placeholder="Nhập họ và tên" value="" onblur="CheckName()">
                       </div>
                     </div>
                     <div class="row">
                       <!-- Số điện thoại -->
                       <div class="col-lg-12 form-group">
                         <label class="text-small " for="phone">Số điện thoại (*)</label>
-                        <input class="form-control" name="phone" id="phone" type="tel" placeholder="Nhập số điện thoại"
-                          value="" onblur="CheckPhone()">
-                      </div>
-                      <div class="col-lg-12 form-group">
-                        <span class="text-danger" id="mess_phone">Vui lòng nhập số điện thoại</span>
+                        <input class="form-control" name="phone" id="phone" type="tel" placeholder="Nhập số điện thoại" value="" onblur="CheckPhone()">
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-lg-12 form-group">
                         <label class="text-small " for="address">Địa chỉ nhận hàng (*)</label>
-                        <input class="form-control" id="address" name="address" type="text"
-                          placeholder="số nhà, đường, xã/phường, quận/huyện, tỉnh/TP" onblur="CheckAddress()">
+                        <input class="form-control" id="address" name="address" type="text" placeholder="số nhà, đường, xã/phường, quận/huyện, tỉnh/TP" onblur="CheckAddress()">
                       </div>
+                    </div>
+                    <div class="row">
                       <div class="col-lg-12 form-group">
-                        <span class="text-danger" id="mess_address">Vui lòng nhập thông tin</span>
+                        <label class="text-small " for="company">Tên công ty (*)</label>
+                        <input class="form-control" id="company" name="company" type="text" placeholder="số nhà, đường, xã/phường, quận/huyện, tỉnh/TP" onblur="CheckAddress()">
                       </div>
                     </div>
                     <div class="row">
@@ -71,14 +82,9 @@
                     </div>
                     <!-- Địa chỉ nhận hàng -->
 
-                    <div class="row">
-                      <div class="col-lg-12 form-group">
-                        <span class="text-danger" id="messenger_all">Vui lòng nhập thông tin hợp lệ</span>
-                      </div>
-                    </div>
                     <div class="row justify-content-between">
                       <div class="col-lg-4">
-                        <a href="<?php echo $host; ?>checkout.php">
+                        <a href="<?php echo $host; ?>cart.php">
                           <button type="button" class="btn medium-secondary-btn btn-block">Quay lại</button>
                         </a>
                       </div>
@@ -100,56 +106,41 @@
             <div class="col-lg-5">
               <div class="card border-0 ">
                 <div class="card-header card-2">
-                  <p class="card-text text-muted mt-md-4 mb-2 space">Giỏ hàng <span
-                      class=" small text-muted ml-2 cursor-pointer">(2 sản phẩm)</span> </p>
+                  <p class="card-text text-muted mt-md-4 mb-2 space">
+                    Giỏ hàng <span class=" small text-muted ml-2 cursor-pointer">(<?php echo count($cart); ?> sản phẩm)</span>
+                  </p>
                   <hr class="my-2">
                 </div>
                 <div class="card-body pt-3">
-
-                  <div class="row justify-content-between">
-                    <div class="col-auto col-md-7">
-                      <div class="media flex-column flex-sm-row"> <img class=" img-fluid mr-3"
-                          src="<?php echo $host; ?>assets/images/products/product-detail-1.jpg" width="62" height="62">
-                        <div class="media-body my-auto">
-                          <div class="row ">
-                            <div class="col">
-                              <p class="mb-0"><b>Apple Watch S6 LTE 44mm</b></p><small class="text-muted">Đồng hồ thông
-                                minh</small>
+                  <?php
+                  foreach ($cart as $key => $item) {
+                    $item_sql = "SELECT * FROM hanghoa h JOIN loaihanghoa l ON l.MaLoaiHang=h.MaLoaiHang WHERE MSHH=" . $item["pd_id"];
+                    $product = getList($conn, $item_sql)[0];
+                    $total_price += ($product["Gia"] * $item["pd_quantity"]);
+                    ?>
+                    <div class="row justify-content-between">
+                      <div class="col-auto col-md-7">
+                        <div class="media flex-column flex-sm-row">
+                          <img class=" img-fluid mr-3" src="<?php echo $host; ?>assets/images/products/<?php echo $item["pd_img"]; ?>" width="62" height="62">
+                          <div class="media-body my-auto">
+                            <div class="row ">
+                              <div class="col">
+                                <p class="mb-0"><b><?php echo $product["TenHH"]; ?></b></p>
+                                <small class="text-muted"><?php echo $product["TenLoaiHang"]; ?></small>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <div class="pl-0 flex-sm-col col-auto my-auto">
-                      <p class="boxed">3</p>
-                    </div>
-                    <div class="pl-0 flex-sm-col col-auto my-auto">
-                      <p><b>18.691.000 VNĐ</b></p>
-                    </div>
-                  </div>
-                  <hr class="my-2">
-                  <div class="row justify-content-between">
-                    <div class="col-auto col-md-7">
-                      <div class="media flex-column flex-sm-row"> <img class=" img-fluid mr-3"
-                          src="<?php echo $host; ?>assets/images/products/product-detail-1.jpg" width="62" height="62">
-                        <div class="media-body my-auto">
-                          <div class="row ">
-                            <div class="col">
-                              <p class="mb-0"><b>Apple Watch S6 LTE 44mm</b></p><small class="text-muted">Đồng hồ thông
-                                minh</small>
-                            </div>
-                          </div>
-                        </div>
+                      <div class="pl-0 flex-sm-col col-auto my-auto">
+                        <p class="boxed"><?php echo $item["pd_quantity"]; ?></p>
+                      </div>
+                      <div class="pl-0 flex-sm-col col-auto my-auto">
+                        <p><b><?php echo number_format($product["Gia"] * $item["pd_quantity"]); ?> VNĐ</b></p>
                       </div>
                     </div>
-                    <div class="pl-0 flex-sm-col col-auto my-auto">
-                      <p class="boxed">3</p>
-                    </div>
-                    <div class="pl-0 flex-sm-col col-auto my-auto">
-                      <p><b>18.691.000 VNĐ</b></p>
-                    </div>
-                  </div>
-                  <hr class="my-2">
+                    <hr class="my-2">
+                  <?php } ?>
                   <div class="row ">
                     <div class="col">
                       <div class="row justify-content-between">
@@ -157,7 +148,7 @@
                           <p class="mb-1">Giá tạm tính</p>
                         </div>
                         <div class="flex-sm-col col-auto">
-                          <p class="mb-1">18.691.000 VNĐ</p>
+                          <p class="mb-1"><?php echo number_format($total_price); ?> VNĐ</p>
                         </div>
                       </div>
                       <div class="row justify-content-between">
@@ -173,7 +164,7 @@
                           <p><b>Tổng cộng</b></p>
                         </div>
                         <div class="flex-sm-col col-auto">
-                          <p style="color: var(--primary-color)" class="mb-1"><b>18.691.000 VNĐ</b></p>
+                          <p style="color: var(--primary-color)" class="mb-1"><b><?php echo number_format($total_price); ?> VNĐ</b></p>
                         </div>
                       </div>
                       <hr class="my-0">
@@ -193,8 +184,6 @@
       </div>
     </div>
   </section>
-
-
 
 
 

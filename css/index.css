@@ -98,6 +98,30 @@ a:hover{
     color: #FFFFFF;
 }
 
+.small-primary-btn{
+    background-color: var(--primary-color) !important;
+    color: #FFFFFF;
+    border-radius: 13px !important;
+    min-width: 60px;
+}
+
+.small-primary-btn:hover{
+    background-color: var(--primary-color) !important;
+    color: #FFFFFF;
+}
+
+.small-third-btn{
+    background-color: var(--third-color) !important;
+    color: #FFFFFF;
+    border-radius: 13px !important;
+    min-width: 60px;
+}
+
+.small-third-btn:hover{
+    background-color: var(--third-color) !important;
+    color: #FFFFFF;
+}
+
 .medium-secondary-btn{
     background-color: white !important;
     border-radius: 13px !important;
@@ -222,3 +246,18 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+
+/* carousel */
+.carousel-indicators{
+    padding-bottom: 0 !important;
+}
+.carousel-indicators li {
+    cursor: pointer;
+    background-color: #BDC1E3;
+}
+.carousel-indicators .active {
+    background-color: var(--primary-color);
+}
+
+/* carousel */
