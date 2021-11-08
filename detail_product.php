@@ -6,7 +6,7 @@
   if (session_id() === '')
     session_start();
 
-  $title = "Trang chủ";
+  $title = "Chi tiết măt hàng";
   require('connect.php');
   require('repository.php');
   include_once('components/import_header.php');

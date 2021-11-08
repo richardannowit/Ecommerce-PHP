@@ -21,7 +21,7 @@ $total_price = 0;
 <head>
   <?php
 
-  $title = "Trang chủ";
+  $title = "Giỏ hàng";
   include_once('components/import_header.php');
 
   ?>

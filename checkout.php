@@ -21,7 +21,7 @@ $total_price = 0;
 <head>
   <?php
 
-  $title = "Trang chủ";
+  $title = "Đặt hàng";
   include_once('components/import_header.php');
 
   ?>
@@ -46,38 +46,38 @@ $total_price = 0;
                   <p class="">(*) Thông tin bắt buộc nhập</p>
                 </div>
                 <div class="col-lg-12">
-                  <form action="" method="GET">
+                  <form action="" method="POST">
                     <div class="row">
                       <!-- Họ tên -->
                       <div class="col-lg-12 form-group">
                         <label class="text-small " for="name">Họ và tên (*)</label>
-                        <input class="form-control" id="name" name="name" type="text" placeholder="Nhập họ và tên" value="" onblur="CheckName()">
+                        <input required class="form-control" id="name" name="name" type="text" placeholder="Nhập họ và tên" value="">
                       </div>
                     </div>
                     <div class="row">
                       <!-- Số điện thoại -->
                       <div class="col-lg-12 form-group">
                         <label class="text-small " for="phone">Số điện thoại (*)</label>
-                        <input class="form-control" name="phone" id="phone" type="tel" placeholder="Nhập số điện thoại" value="" onblur="CheckPhone()">
+                        <input required class="form-control" pattern="[0-9]+" name="phone" id="phone" type="tel" placeholder="Nhập số điện thoại">
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-lg-12 form-group">
                         <label class="text-small " for="address">Địa chỉ nhận hàng (*)</label>
-                        <input class="form-control" id="address" name="address" type="text" placeholder="số nhà, đường, xã/phường, quận/huyện, tỉnh/TP" onblur="CheckAddress()">
+                        <input required class="form-control" id="address" name="address" type="text" placeholder="số nhà, đường, xã/phường, quận/huyện, tỉnh/TP">
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-lg-12 form-group">
                         <label class="text-small " for="company">Tên công ty (*)</label>
-                        <input class="form-control" id="company" name="company" type="text" placeholder="số nhà, đường, xã/phường, quận/huyện, tỉnh/TP" onblur="CheckAddress()">
+                        <input required class="form-control" id="company" name="company" type="text" placeholder="số nhà, đường, xã/phường, quận/huyện, tỉnh/TP">
                       </div>
                     </div>
                     <div class="row">
-                      <!-- Email -->
+                      <!-- Số điện thoại -->
                       <div class="col-lg-12 form-group">
-                        <label class="text-small " for="email">Email address </label>
-                        <input class="form-control" name="email" type="email" placeholder="Nhập địa chỉ email" value="">
+                        <label class="text-small " for="fax">Số FAX (*)</label>
+                        <input required class="form-control " pattern="[0-9]+" name="fax" id="fax" type="tel" placeholder="Nhập số điện thoại">
                       </div>
                     </div>
                     <!-- Địa chỉ nhận hàng -->
@@ -89,9 +89,7 @@ $total_price = 0;
                         </a>
                       </div>
                       <div class="col-lg-4">
-                        <a href="<?php echo $host; ?>checkout.php">
-                          <button type="button" class="btn medium-primary-btn btn-block">Đặt hàng</button>
-                        </a>
+                        <button type="submit" class="btn medium-primary-btn btn-block">Đặt hàng</button>
                       </div>
                     </div>
                   </form>
