@@ -7,17 +7,19 @@ if (isset($_POST['add_to_cart'])) {
     $img = $_POST["image"];
     $conlai = $_POST["conlai"];
     if ($quantity == '' || $quantity < 1 || $quantity > $conlai) {
-        echo 'Mặt hàng này đã hết hàng';
+        echo '0';
+        // echo 'Mặt hàng này đã hết hàng';
     } else {
 
         //unset($_SESSION['cart']);
         if (isset($_SESSION['cart'][$id])) {
             $actual_quantity = $_SESSION['cart'][$id]['pd_quantity'] + $quantity;
             if ($actual_quantity > $conlai) {
-                echo "Số lượng bạn đặt quá số lượng trong kho";
+                // echo "Số lượng bạn đặt quá số lượng trong kho";
+                echo "-1";
             } else {
                 $_SESSION['cart'][$id]['pd_quantity'] += $quantity;
-                echo "Thêm vào giỏ hàng thành công";
+                echo count($_SESSION['cart']);
             }
         } else {
             $product = array(
@@ -26,7 +28,7 @@ if (isset($_POST['add_to_cart'])) {
                 'pd_img' => $img,
             );
             $_SESSION['cart'][$id] = $product;
-            echo "Thêm vào giỏ hàng thành công";
+            echo count($_SESSION['cart']);
         }
     }
 }

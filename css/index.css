@@ -261,3 +261,48 @@ input::-webkit-inner-spin-button {
 }
 
 /* carousel */
+
+
+/* Navbar */
+bs4header a.nav-link::before {
+    content: '';
+    display: block;
+    width: 0px;
+    height: 2px;
+    background: #fff;
+    transition: 0.2s;
+}
+.bs4header a.nav-link:hover::before {
+    width: 100%;
+    
+}
+
+
+
+/* Navbar */
+
+
+
+/* Cart icon  */
+ul li a {
+    font-size: 1.1rem;
+    color: #ffffff;
+  }
+  
+  ul li a.cart:hover {
+    text-decoration: none;
+    color: #ffffff;
+  }
+  
+  ul li a.cart .cart-basket {
+    font-size: .6rem;
+    position: absolute;
+    top: -2px;
+    right: -8px;
+    width: 15px;
+    height: 15px;
+    color: #fff;
+    background-color: var(--third-color);
+    border-radius: 50%;
+  }
+/* Cart icon  */

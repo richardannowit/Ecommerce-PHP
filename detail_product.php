@@ -217,9 +217,25 @@
             add_to_cart: "Click",
           },
           success: function(result) {
+            if (result == "-1") {
+              Snackbar.show({
+                text: "Số lượng bạn đặt quá số lượng trong kho"
+              });
+              return;
+            }
+            if (result == "0") {
+              Snackbar.show({
+                text: "Mặt hàng này đã hết hàng"
+              });
+              return;
+            }
+
+            $("#cart-count").text(result);
             Snackbar.show({
-              text: result
+              text: "Thêm vào giỏ hàng thành công"
             });
+
+
           },
           error: function(result) {
             Snackbar.show({
