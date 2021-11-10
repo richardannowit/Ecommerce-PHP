@@ -1,3 +1,13 @@
+<?php
+if (session_id() === '')
+    session_start();
+
+if (!isset($_SESSION['msnv'])) {
+    header('location:login.php');
+    exit;
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
