@@ -1,8 +1,8 @@
 <?php
 if (session_id() === '')
   session_start();
-require('connect.php');
-require('repository.php');
+require('../database/connect.php');
+require('../database/repository.php');
 
 $cart = null;
 if (isset($_SESSION['cart'])) {
@@ -146,7 +146,7 @@ $total_price = 0;
 
               <div class="row mt-2">
                 <div class="col-lg-12">
-                  <a href="<?php echo $host; ?>checkout.php">
+                  <a href="checkout.php">
                     <button type="button" class="btn medium-primary-btn btn-block">Đặt hàng</button>
                   </a>
                 </div>

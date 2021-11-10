@@ -1,6 +1,6 @@
 <?php include_once('../domain.php');
-require('../connect.php');
-require('../repository.php');
+require('../database/connect.php');
+require('../database/repository.php');
 ?>
 
 <head>

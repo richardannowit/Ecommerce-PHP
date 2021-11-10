@@ -1,8 +1,8 @@
 <?php
 if (session_id() === '')
   session_start();
-require('connect.php');
-require('repository.php');
+require('../database/connect.php');
+require('../database/repository.php');
 
 $cart = null;
 if (isset($_SESSION['cart'])) {
@@ -84,7 +84,7 @@ $total_price = 0;
 
                     <div class="row justify-content-between">
                       <div class="col-lg-4">
-                        <a href="<?php echo $host; ?>cart.php">
+                        <a href="cart.php">
                           <button type="button" class="btn medium-secondary-btn btn-block">Quay lại</button>
                         </a>
                       </div>

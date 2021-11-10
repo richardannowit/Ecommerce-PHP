@@ -4,8 +4,8 @@
 <?php
 
 $title = "Trang chủ";
-require('connect.php');
-require('repository.php');
+require('../database/connect.php');
+require('../database/repository.php');
 include_once('components/import_header.php');
 
 
@@ -214,13 +214,13 @@ $total_page = ceil(getOne($conn, $count_query) / (float) $itemsPerPage);
                         $image_query = "SELECT * FROM hinhhanghoa WHERE MSHH=" . $row["MSHH"];
                         $image = getList($conn, $image_query);
                         ?>
-                      <img src="<?php echo $host; ?>assets/images/products/<?php echo $image[0]["TenHinh"]; ?>" height="250" width="250" class="">
+                      <img src="../assets/images/products/<?php echo $image[0]["TenHinh"]; ?>" height="250" width="250" class="">
                       <input type="hidden" id="image_<?php echo $row['MSHH']; ?>" value="<?php echo $image[0]["TenHinh"]; ?>" />
                     </div>
                     <div class="card-body">
                       <h5 class="card-title mb-1">
                         <strong>
-                          <a href="<?php echo $host; ?>detail_product.php?id=<?php echo $row['MSHH']; ?>" class="dark-grey-text">
+                          <a href="detail_product.php?id=<?php echo $row['MSHH']; ?>" class="dark-grey-text">
                             <?php echo $row["TenHH"]; ?>
                           </a>
                         </strong>

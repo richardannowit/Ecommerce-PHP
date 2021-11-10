@@ -7,8 +7,8 @@
     session_start();
 
   $title = "Chi tiết măt hàng";
-  require('connect.php');
-  require('repository.php');
+  require('../database/connect.php');
+  require('../database/repository.php');
   include_once('components/import_header.php');
 
   $id = -1;
@@ -185,12 +185,12 @@
       <div class="bg-light px-4 py-3">
         <div class="row align-items-center text-center">
           <div class="col-md-6 col-sm-6 mb-3 mb-md-0 text-md-left">
-            <a class="btn btn-link p-0 text-dark btn-sm" href="<?php echo $host; ?>index.php">
+            <a class="btn btn-link p-0 text-dark btn-sm" href="index.php">
               <i class="fas fa-long-arrow-alt-left mr-2"> </i>
               Tiếp tục mua sắm
             </a>
           </div>
-          <div class="col-md-6 col-sm-6 text-md-right"><a class="btn btn-outline-dark btn-sm" href="<?php echo $host; ?>cart.php">Đi đến
+          <div class="col-md-6 col-sm-6 text-md-right"><a class="btn btn-outline-dark btn-sm" href="cart.php">Đi đến
               giỏ hàng<i class="fas fa-long-arrow-alt-right ml-2"></i></a></div>
         </div>
       </div>

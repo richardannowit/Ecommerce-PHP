@@ -1,6 +1,6 @@
 <?php
-require('../connect.php');
-require('../repository.php');
+require('../database/connect.php');
+require('../database/repository.php');
 if (isset($_POST['delete'])) {
     $id = $_POST['product_id'];
     $delete_sql = "DELETE FROM hanghoa WHERE MSHH=" . $id;
