@@ -20,3 +20,13 @@ function db_insert($conn, $sql)
 {
     return $conn->query($sql) ? $conn->insert_id : 0;
 }
+
+function db_update($conn, $sql)
+{
+    return $conn->query($sql);
+}
+
+function db_delete($conn, $sql)
+{
+    return $conn->query($sql);
+}

@@ -39,14 +39,17 @@ $category_list = getList($conn, $category_query);
                         <td><?php echo $row["MaLoaiHang"]; ?></td>
                         <td><?php echo $row["TenLoaiHang"]; ?></td>
                         <td>
-                          <button type="button" class="btn btn-primary btn-icon btn-rounded px-0">
-                            <i class="ti-pencil-alt mx-0"></i>
-                          </button>
-                          <button type="button" onclick="delete_category();" class="btn btn-danger btn-rounded btn-icon px-0" style="color: white; margin-left: 10px;">
+                          <a href="edit_category.php?id=<?php echo $row["MaLoaiHang"]; ?>">
+                            <button type="button" class="btn btn-primary btn-icon btn-rounded px-0">
+                              <i class="ti-pencil-alt mx-0"></i>
+                            </button>
+                          </a>
+                          <button type="button" delete_id="<?php echo $row["MaLoaiHang"]; ?>" class="btn btn-danger btn-rounded btn-icon px-0 delete" style="color: white; margin-left: 10px;">
                             <i class="ti-trash mx-0"></i>
                           </button>
                         </td>
                       </tr>
+                      <input type="hidden" value="<?php echo $row["MaLoaiHang"]; ?>" id="category_id" name="category_id" />
                     <?php } ?>
                   </tbody>
                 </table>
@@ -60,8 +63,9 @@ $category_list = getList($conn, $category_query);
 </div>
 
 
+
 <script>
-  function delete_category() {
+  function delete_category(id) {
     Swal.fire({
       title: 'Xác nhận xoá?',
       text: "Bạn có chắc chắn muốn xoá nó không!",
@@ -73,14 +77,48 @@ $category_list = getList($conn, $category_query);
       cancelButtonText: 'Huỷ'
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire(
-          'Deleted!',
-          'Your file has been deleted.',
-          'success'
-        ).then((res) => {
-          console.log("Da xoa");
-        })
+        $.ajax({
+          type: "POST",
+          url: "delete_category.php",
+          data: {
+            category_id: id,
+            delete: "Click",
+          },
+          success: function(result) {
+            if (result === '1') {
+              Swal.fire(
+                'Thành công!',
+                'Loại hàng đã được xoá thành công.',
+                'success'
+              ).then((res) => {
+                location.reload(true);
+              });
+            } else {
+              Swal.fire(
+                'Thất bại!',
+                'Xoá không thành công do có tồn tại sản phẩm thuộc loại hàng này .',
+                'error'
+              ).then((res) => {
+                location.reload(true);
+              });
+            }
+
+          },
+          error: function(result) {
+            Swal.fire(
+              'Thất bại!',
+              'Xoá loại hàng thất bại.',
+              'error'
+            );
+          }
+        });
       }
     })
   }
+  $(document).ready(function() {
+    $(".delete").click(function(e) {
+      var id = $(this).attr("delete_id");
+      delete_category(id);
+    });
+  });
 </script>

@@ -55,7 +55,7 @@ $product_list = getList($conn, $product_query);
                               <i class="ti-pencil-alt mx-0"></i>
                             </button>
                           </a>
-                          <button type="button" class="btn btn-danger btn-rounded btn-icon px-0" style="color: white; margin-left: 10px;">
+                          <button type="button" delete_id="<?php echo $row["MSHH"]; ?>" class="btn btn-danger btn-rounded btn-icon px-0 delete" style="color: white; margin-left: 10px;">
                             <i class="ti-trash mx-0"></i>
                           </button>
                         </td>
@@ -71,3 +71,53 @@ $product_list = getList($conn, $product_query);
     </div>
   </div>
 </div>
+
+
+
+<script>
+  function delete_product(id) {
+    Swal.fire({
+      title: 'Xác nhận xoá?',
+      text: "Bạn có chắc chắn muốn xoá sản phẩm này không!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Xác nhận',
+      cancelButtonText: 'Huỷ'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $.ajax({
+          type: "POST",
+          url: "delete_product.php",
+          data: {
+            product_id: id,
+            delete: "Click",
+          },
+          success: function(result) {
+            Swal.fire(
+              'Thành công!',
+              'Sản phẩm đã được xoá thành công.',
+              'success'
+            ).then((res) => {
+              location.reload(true);
+            });
+          },
+          error: function(result) {
+            Swal.fire(
+              'Thất bại!',
+              'Xoá sản phẩm thất bại.',
+              'error'
+            );
+          }
+        });
+      }
+    })
+  }
+  $(document).ready(function() {
+    $(".delete").click(function(e) {
+      var id = $(this).attr("delete_id");
+      delete_product(id);
+    });
+  });
+</script>

@@ -16,6 +16,8 @@ require('../repository.php');
     <link rel="stylesheet" href="css/dataTables.bootstrap4.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/sweetalert2.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
     <script defer src="js/font-awesome.js"></script>
     <script defer src="js/vendor.bundle.base.js"></script>
     <script defer src="js/jquery.dataTables.js"></script>
