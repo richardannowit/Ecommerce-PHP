@@ -1,0 +1,11 @@
+Người dùng đăng ký lần đầu -> Trang nhập thông tin (Họ tên, sđt,...), thêm địa chỉ
+    + Lúc thêm địa chỉ thì sẽ insert id của khách hàng vào
+Lúc đăng nhập rồi thì sẽ load được danh sách địa chỉ của khách hàng đó
+** Thêm mã địa chỉ vào trong bảng đặt hàng là khoá ngoại của cột địa chỉ
+Khi đặt hàng thì auto chọn địa chỉ đàu, bấm thay đổi thì hệ thống hiển thị ra các địa chỉ khác và chọn
+Khi insert vào thì sẽ insert mã khách hàng, mã địa chỉ, ngày đặt lấy mặc định từ hệ thống
+Sau khi insert sẽ có mã đơn hàng, lấy mã đơn hàng đó để insert từng món hàng một trên cùng 1 mã đơn hàng (Primary key là mã đơn hàng và mã hàng hoá)
+Trạng thái đơn hàng:
+    + 0: Đơn hàng chưa xử lý -> cho phép cập nhật lại số lượng, địa chỉ, sđt,...
+    + 1: Đơn hàng đã xử lý -> Không cho cập nhật nữa
+

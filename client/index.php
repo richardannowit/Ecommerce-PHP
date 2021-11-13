@@ -225,7 +225,7 @@ $total_page = ceil(getOne($conn, $count_query) / (float) $itemsPerPage);
                           </a>
                         </strong>
                       </h5>
-                      <span class="badge badge-danger mb-2">bestseller</span>
+                      <span class="badge badge-danger mb-2">Bán chạy</span>
                       <!-- Rating -->
                       <!-- <ul class="rating">
                                         <li><i class="fas fa-star blue-text"></i></li>
@@ -242,7 +242,7 @@ $total_page = ceil(getOne($conn, $count_query) / (float) $itemsPerPage);
                       <div class="card-footer pb-0">
                         <div class="d-flex align-items-center justify-content-around row mb-0">
                           <strong><?php echo number_format($row["Gia"]); ?> VNĐ</strong>
-                          <button type="button" id="<?php echo $row['MSHH']; ?>" class="btn medium-secondary-btn add_to_cart" style="background-color: var(--primary-color) !important; color: white">
+                          <button type="button" id="<?php echo $row['MSHH']; ?>" class="btn btn-block medium-secondary-btn add_to_cart" style="background-color: var(--primary-color) !important; font-size: 0.875rem; color: white">
                             Add to cart
                           </button>
 

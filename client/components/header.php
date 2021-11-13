@@ -36,12 +36,18 @@ if (isset($_SESSION['cart'])) {
                         </a>
                     </li>
                     <li class="dropdown">
-                        <button class="btn btn-warning dropdown-toggle ml-lg-5" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tài khoản</button>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">Trần Đăng Khoa</a>
-                            <a class="dropdown-item" href="#">Setting</a>
-                            <a class="dropdown-item" href="#">Đăng xuất</a>
-                        </div>
+                        <?php if (isset($_SESSION['mskh'])) { ?>
+                            <button class="btn btn-warning dropdown-toggle ml-lg-5" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <?php echo $_SESSION['tenkh']; ?>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="#">Đơn hàng của tôi</a>
+                                <a class="dropdown-item" href="#">Tài khoản của tôi</a>
+                                <a class="dropdown-item" href="logout.php">Đăng xuất</a>
+                            </div>
+                        <?php } else { ?>
+                            <a class="btn btn-warning ml-lg-5" href="login.php">Đăng nhập</a>
+                        <?php } ?>
                     </li>
                 </ul>
             </div>

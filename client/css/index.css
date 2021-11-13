@@ -15,6 +15,7 @@ body {
     height: 100%;
     /* font-family: 'Nunito','Be Vietnam Pro', sans-serif; */
     font-family: 'Nunito', sans-serif;
+    background-color: #ffffff !important;
 }
 strong{
     font-weight: 700;
@@ -127,6 +128,9 @@ a:hover{
     border-radius: 13px !important;
     border: 2px solid var(--secondary-color);
     min-width: 120px;
+    font-size: 0.9rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
 }
 
 .medium-secondary-btn.active{
