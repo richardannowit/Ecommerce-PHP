@@ -4,11 +4,12 @@ if (session_id() === '')
 require('../database/connect.php');
 require('../database/repository.php');
 
-$cart = null;
+$cart = array();
+$count_cart = 0;
 if (isset($_SESSION['cart'])) {
   $cart = $_SESSION['cart'];
+  $count_cart = count($cart);
 }
-
 
 
 $total_price = 0;
@@ -53,8 +54,8 @@ $total_price = 0;
 
                   <!-- Đã Đăng nhập -->
                   <div class="col-lg-12">
-                    <form action="" method="POST">
-                      <input type="hidden" id="mskh" value="<?php echo $user['MSKH']; ?>" />
+                    <form action="order.php" method="POST">
+                      <input type="hidden" name="mskh" id="mskh" value="<?php echo $user['MSKH']; ?>" />
                       <div class="row">
                         <!-- Họ tên -->
                         <div class="col-lg-12 form-group">
@@ -69,12 +70,7 @@ $total_price = 0;
                           <input class="form-control" disabled name="phone" id="phone" type="tel" value="<?php echo $user['SoDienThoai']; ?>">
                         </div>
                       </div>
-                      <div class="row">
-                        <div class="col-lg-12 form-group">
-                          <label class="text-small " for="email">Email</label>
-                          <input class="form-control" disabled name="email" id="email" type="email" value="<?php echo $user['Email']; ?>">
-                        </div>
-                      </div>
+
                       <div class="row">
                         <div class="col-lg-12 form-group">
                           <div class="row justify-content-between">
@@ -86,13 +82,19 @@ $total_price = 0;
                             </div>
                           </div>
 
-                          <select class="form-control" name="category_id" id="loaihang">
+                          <select class="form-control" name="address" id="address">
                             <?php
                               foreach ($address as $row) {
                                 ?>
                               <option value="<?php echo $row["MaDC"]; ?>"><?php echo $row["DiaChi"]; ?></option>
                             <?php } ?>
                           </select>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-12 form-group">
+                          <label class="text-small " for="email">Email</label>
+                          <input class="form-control" name="email" id="email" type="email" value="<?php echo $user['Email']; ?>">
                         </div>
                       </div>
                       <div class="row">
@@ -114,7 +116,7 @@ $total_price = 0;
                           </a>
                         </div>
                         <div class="col-lg-4">
-                          <button type="submit" class="btn medium-primary-btn btn-block">Đặt hàng</button>
+                          <button type="submit" <?php echo !isset($_SESSION['cart']) || count($_SESSION['cart']) == 0  ? "disabled" : "";  ?> class="btn medium-primary-btn btn-block">Đặt hàng</button>
                         </div>
                       </div>
                     </form>
@@ -126,38 +128,53 @@ $total_price = 0;
                     <p class="">(*) Thông tin bắt buộc nhập</p>
                   </div>
                   <div class="col-lg-12">
-                    <form action="" method="POST">
+                    <form action="order.php" method="POST">
                       <div class="row">
                         <!-- Họ tên -->
                         <div class="col-lg-12 form-group">
-                          <label class="text-small " for="name">Họ và tên (*)</label>
+                          <label class="text-small " for="name">Họ và tên
+                            <span class="text-danger" data-toggle="tooltip" data-placement="left" title="" data-original-title="Thông tin bắt buộc nhập">(*)</span>
+                          </label>
                           <input required class="form-control" id="name" name="name" type="text" placeholder="Nhập họ và tên" value="">
                         </div>
                       </div>
                       <div class="row">
                         <!-- Số điện thoại -->
                         <div class="col-lg-12 form-group">
-                          <label class="text-small " for="phone">Số điện thoại (*)</label>
+                          <label class="text-small " for="phone">Số điện thoại
+                            <span class="text-danger" data-toggle="tooltip" data-placement="left" title="" data-original-title="Thông tin bắt buộc nhập">(*)</span>
+                          </label>
                           <input required class="form-control" pattern="[0-9]+" name="phone" id="phone" type="tel" placeholder="Nhập số điện thoại">
                         </div>
                       </div>
+
                       <div class="row">
                         <div class="col-lg-12 form-group">
-                          <label class="text-small " for="address">Địa chỉ nhận hàng (*)</label>
-                          <input required class="form-control" id="address" name="address" type="text" placeholder="số nhà, đường, xã/phường, quận/huyện, tỉnh/TP">
+                          <label class="text-small " for="address">Địa chỉ nhận hàng
+                            <span class="text-danger" data-toggle="tooltip" data-placement="left" title="" data-original-title="Thông tin bắt buộc nhập">(*)</span>
+                          </label>
+                          <input required class="form-control" id="address" name="address" type="text" placeholder="Số nhà, đường, xã/phường, quận/huyện, tỉnh/TP">
                         </div>
                       </div>
                       <div class="row">
                         <div class="col-lg-12 form-group">
-                          <label class="text-small " for="company">Tên công ty (*)</label>
-                          <input required class="form-control" id="company" name="company" type="text" placeholder="số nhà, đường, xã/phường, quận/huyện, tỉnh/TP">
+                          <label class="text-small " for="email">
+                            Email
+                          </label>
+                          <input class="form-control" name="email" id="email" type="email" placeholder="Nhập địa chỉ email">
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-12 form-group">
+                          <label class="text-small " for="company">Tên công ty</label>
+                          <input class="form-control" id="company" name="company" type="text" placeholder="Nhập tên công ty">
                         </div>
                       </div>
                       <div class="row">
                         <!-- Số điện thoại -->
                         <div class="col-lg-12 form-group">
-                          <label class="text-small " for="fax">Số FAX (*)</label>
-                          <input required class="form-control " pattern="[0-9]+" name="fax" id="fax" type="tel" placeholder="Nhập số điện thoại">
+                          <label class="text-small " for="fax">Số FAX</label>
+                          <input class="form-control" name="fax" id="fax" type="tel" placeholder="Nhập số fax">
                         </div>
                       </div>
                       <!-- Địa chỉ nhận hàng -->
@@ -169,7 +186,7 @@ $total_price = 0;
                           </a>
                         </div>
                         <div class="col-lg-4">
-                          <button type="submit" class="btn medium-primary-btn btn-block">Đặt hàng</button>
+                          <button type="submit" <?php echo count($_SESSION['cart']) == 0 ? "disabled" : "";  ?> class="btn medium-primary-btn btn-block">Đặt hàng</button>
                         </div>
                       </div>
                     </form>
@@ -190,7 +207,7 @@ $total_price = 0;
 
                     <div class="col-lg-8 ">
                       <p class="card-text text-muted mt-md-4 mb-2 space">
-                        Giỏ hàng <span class=" small text-muted ml-2 cursor-pointer">(<?php echo count($cart); ?> sản phẩm)</span>
+                        Giỏ hàng <span class=" small text-muted ml-2 cursor-pointer">(<?php echo $count_cart; ?> sản phẩm)</span>
                       </p>
                     </div>
                     <div class="col-lg-4 d-flex align-items-end justify-content-end ">
@@ -204,34 +221,44 @@ $total_price = 0;
                 </div>
                 <div class="card-body pt-3">
                   <?php
-                  foreach ($cart as $key => $item) {
-                    $item_sql = "SELECT * FROM hanghoa h JOIN loaihanghoa l ON l.MaLoaiHang=h.MaLoaiHang WHERE MSHH=" . $item["pd_id"];
-                    $product = getList($conn, $item_sql)[0];
-                    $total_price += ($product["Gia"] * $item["pd_quantity"]);
-                    ?>
-                    <div class="row justify-content-between">
-                      <div class="col-auto col-md-7">
-                        <div class="media flex-column flex-sm-row">
-                          <img class=" img-fluid mr-3" src="<?php echo $host; ?>assets/images/products/<?php echo $item["pd_img"]; ?>" width="62" height="62">
-                          <div class="media-body my-auto">
-                            <div class="row ">
-                              <div class="col">
-                                <p class="mb-0"><b><?php echo $product["TenHH"]; ?></b></p>
-                                <small class="text-muted"><?php echo $product["TenLoaiHang"]; ?></small>
+                  if ($count_cart != 0) {
+                    foreach ($cart as $key => $item) {
+                      $item_sql = "SELECT * FROM hanghoa h JOIN loaihanghoa l ON l.MaLoaiHang=h.MaLoaiHang WHERE MSHH=" . $item["pd_id"];
+                      $product = getList($conn, $item_sql)[0];
+                      if ($item["pd_quantity"] > $product["SoLuongHang"]) {
+                        $item["pd_quantity"] = $product["SoLuongHang"];
+                        $_SESSION['cart'][$item["pd_id"]]['pd_quantity'] = $product["SoLuongHang"];
+                      }
+                      if ($item["pd_quantity"] == 0) {
+                        unset($_SESSION['cart'][$item["pd_id"]]);
+                        break;
+                      }
+                      $total_price += ($product["Gia"] * $item["pd_quantity"]);
+                      ?>
+                      <div class="row justify-content-between">
+                        <div class="col-auto col-md-7">
+                          <div class="media flex-column flex-sm-row">
+                            <img class=" img-fluid mr-3" src="<?php echo $host; ?>assets/images/products/<?php echo $item["pd_img"]; ?>" width="62" height="62">
+                            <div class="media-body my-auto">
+                              <div class="row ">
+                                <div class="col">
+                                  <p class="mb-0"><b><?php echo $product["TenHH"]; ?></b></p>
+                                  <small class="text-muted"><?php echo $product["TenLoaiHang"]; ?></small>
+                                </div>
                               </div>
                             </div>
                           </div>
                         </div>
+                        <div class="pl-0 flex-sm-col col-auto my-auto">
+                          <p class="boxed"><?php echo $item["pd_quantity"]; ?></p>
+                        </div>
+                        <div class="pl-0 flex-sm-col col-auto my-auto">
+                          <p><b><?php echo number_format($product["Gia"] * $item["pd_quantity"]); ?> VNĐ</b></p>
+                        </div>
                       </div>
-                      <div class="pl-0 flex-sm-col col-auto my-auto">
-                        <p class="boxed"><?php echo $item["pd_quantity"]; ?></p>
-                      </div>
-                      <div class="pl-0 flex-sm-col col-auto my-auto">
-                        <p><b><?php echo number_format($product["Gia"] * $item["pd_quantity"]); ?> VNĐ</b></p>
-                      </div>
-                    </div>
-                    <hr class="my-2">
-                  <?php } ?>
+                      <hr class="my-2">
+                  <?php }
+                  } ?>
                   <div class="row ">
                     <div class="col">
                       <div class="row justify-content-between">

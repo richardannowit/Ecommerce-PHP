@@ -5,10 +5,14 @@ if (isset($_SESSION['mskh'])) {
   header('location:index.php');
   exit;
 }
+$redirect = "index.php";
+if (isset($_GET['redirect'])) {
+  $redirect = $_GET['redirect'];
+}
 $message = "";
 require('../database/connect.php');
 require('../database/repository.php');
-if (isset($_POST['login'])) {
+if (isset($_POST['login']) && isset($_POST['password'])) {
   $username = $_POST['username'];
   $password = $_POST['password'];
   $login_sql = "SELECT * FROM khachhang WHERE SoDienThoai='$username' AND KHPass='$password'";
@@ -20,7 +24,7 @@ if (isset($_POST['login'])) {
     $_SESSION['sdt'] = $user[0]['SoDienThoai'];
     $_SESSION['tenkh'] = $user[0]['HoTenKH'];
     $_SESSION['mskh'] = $user[0]['MSKH'];
-    header('location:index.php');
+    header('location:' . $redirect);
   }
 }
 

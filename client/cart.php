@@ -4,7 +4,7 @@ if (session_id() === '')
 require('../database/connect.php');
 require('../database/repository.php');
 
-$cart = null;
+$cart = array();
 if (isset($_SESSION['cart'])) {
   $cart = $_SESSION['cart'];
 }
@@ -55,6 +55,14 @@ $total_price = 0;
                   foreach ($cart as $key => $item) {
                     $item_sql = "SELECT * FROM hanghoa h JOIN loaihanghoa l ON l.MaLoaiHang=h.MaLoaiHang WHERE MSHH=" . $item["pd_id"];
                     $product = getList($conn, $item_sql)[0];
+                    if ($item["pd_quantity"] > $product["SoLuongHang"]) {
+                      $item["pd_quantity"] = $product["SoLuongHang"];
+                      $_SESSION['cart'][$item["pd_id"]]['pd_quantity'] = $product["SoLuongHang"];
+                    }
+                    if ($item["pd_quantity"] == 0) {
+                      unset($_SESSION['cart'][$item["pd_id"]]);
+                      break;
+                    }
                     $total_price += ($product["Gia"] * $item["pd_quantity"]);
                     ?>
                   <form action="add_to_cart.php" method="post">
@@ -147,7 +155,7 @@ $total_price = 0;
               <div class="row mt-2">
                 <div class="col-lg-12">
                   <a href="checkout.php">
-                    <button type="button" class="btn medium-primary-btn btn-block">Đặt hàng</button>
+                    <button type="button" <?php echo !isset($_SESSION['cart']) || count($_SESSION['cart']) == 0  ? "disabled" : "";  ?> class="btn medium-primary-btn btn-block">Đặt hàng</button>
                   </a>
                 </div>
               </div>

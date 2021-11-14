@@ -43,10 +43,10 @@ if (isset($_SESSION['cart'])) {
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="#">Đơn hàng của tôi</a>
                                 <a class="dropdown-item" href="#">Tài khoản của tôi</a>
-                                <a class="dropdown-item" href="logout.php">Đăng xuất</a>
+                                <a class="dropdown-item" href="logout.php?redirect=<?php echo $_SERVER['REQUEST_URI']; ?>">Đăng xuất</a>
                             </div>
                         <?php } else { ?>
-                            <a class="btn btn-warning ml-lg-5" href="login.php">Đăng nhập</a>
+                            <a class="btn btn-warning ml-lg-5" href="login.php?redirect=<?php echo $_SERVER['REQUEST_URI']; ?>">Đăng nhập</a>
                         <?php } ?>
                     </li>
                 </ul>
