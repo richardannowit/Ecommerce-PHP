@@ -5,33 +5,43 @@ if (isset($_SESSION['mskh'])) {
   header('location:index.php');
   exit;
 }
-$redirect = "index.php";
-if (isset($_GET['redirect'])) {
-  $redirect = $_GET['redirect'];
-}
 $message = "";
 require('../database/connect.php');
 require('../database/repository.php');
-if (isset($_GET['signup'])) {
-  $message = '<div class="alert alert-success" role="alert">
-    Đăng ký tài khoản thành công. Vui lòng đăng nhập để tiếp tục!
-  </div>';
-}
-if (isset($_POST['login']) && isset($_POST['password'])) {
-  $username = $_POST['username'];
-  $password = $_POST['password'];
-  $login_sql = "SELECT * FROM khachhang WHERE SoDienThoai='$username' AND KHPass='$password'";
-  $user = getList($conn, $login_sql);
-  if (count($user) == 0) {
+
+
+if (isset($_POST['signup'])) {
+  echo "SUBMIT";
+  $name = "";
+  $phone = "";
+  $password = "";
+
+  if (isset($_POST['name'])) {
+    $name = $_POST['name'];
+  }
+  if (isset($_POST['phone'])) {
+    $phone = $_POST['phone'];
+  }
+  if (isset($_POST['password'])) {
+    $password = $_POST['password'];
+  }
+  $addUser_sql = "INSERT INTO khachhang (HoTenKH,SoDienThoai,KHPass) VALUES ('$name','$phone','$password')";
+  $mskh = db_insert($conn, $addUser_sql);
+  if (!$mskh) {
     $message = "<div class='alert alert-danger' role='alert'>
-    Tài khoản đăng nhập không đúng.</div>";
+    Số điện thoại đã tồn tại.</div>";;
   } else {
-    $_SESSION['sdt'] = $user[0]['SoDienThoai'];
-    $_SESSION['tenkh'] = $user[0]['HoTenKH'];
-    $_SESSION['mskh'] = $user[0]['MSKH'];
-    header('location:' . $redirect);
+    if (isset($_POST['address'])) {
+      $address = $_POST['address'];
+      $add_address_sql = "INSERT INTO diachikh (MSKH, DiaChi) VALUES ('$mskh','$address')";
+      db_insert($conn, $add_address_sql);
+    }
+
+    header('location:login.php?signup=1');
   }
 }
+
+
 
 
 ?>
@@ -71,26 +81,35 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
               <div class="brand-logo">
                 <img src="../assets/logo.svg" alt="logo">
               </div>
-              <h3>ĐĂNG NHẬP</h3>
-              <h6 class="font-weight-light mb-3">Vui lòng đăng nhập để tiếp tuc.</h6>
+              <h3>ĐĂNG KÝ TÀI KHOẢN</h3>
+              <h6 class="font-weight-light mb-3">Hãy đăng ký tài khoản để lưu thông tin các đơn hàng.</h6>
               <p class="card-description">
                 <?php echo $message; ?>
               </p>
-              <form class="" action="" method="POST">
+              <form action="" method="POST">
                 <div class="form-group">
-                  <label for="username"><b>Số điện thoại: </b></label>
-                  <input required type="text" name="username" class="form-control form-control-lg" id="username" placeholder="Nhập số điện thoại">
+                  <label for="name"><b>Họ và tên: </b></label>
+                  <input required type="text" name="name" class="form-control form-control-lg" id="name" placeholder="Nhập tên của bạn">
+                </div>
+                <div class="form-group">
+                  <label for="phone"><b>Số điện thoại: </b></label>
+                  <input required class="form-control" name="phone" id="phone" type="tel" placeholder="Nhập số điện thoại">
+                </div>
+                <!-- pattern="[0-9]+" -->
+                <div class="form-group">
+                  <label for="address"><b>Địa chỉ: </b></label>
+                  <input required class="form-control" name="address" id="address" type="text" placeholder="Nhập địa chỉ của bạn">
                 </div>
                 <div class="form-group">
                   <label for="password"><b>Mật khẩu: </b></label>
                   <input required type="password" name="password" class="form-control form-control-lg" id="password" placeholder="Nhập mật khẩu">
                 </div>
                 <div class="my-2 d-flex justify-content-between align-items-center">
-                  <a href="index.php" name="login" class="text-primary">Về trang chủ</a>
-                  <button type="submit" name="login" class="btn btn-primary font-weight-medium">ĐĂNG NHẬP</button>
+                  <a href="index.php" class="text-primary">Về trang chủ</a>
+                  <button type="submit" name="signup" class="btn btn-primary font-weight-medium">ĐĂNG KÝ</button>
                 </div>
                 <div class="text-center mt-4 font-weight-light">
-                  Bạn chưa có tài khoản? <a href="signup.php" class="text-primary">Đăng ký</a>
+                  Bạn đã có tài khoản? <a href="login.php" class="text-primary">Đăng nhập</a>
                 </div>
               </form>
             </div>
