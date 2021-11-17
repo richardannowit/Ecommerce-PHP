@@ -41,7 +41,7 @@ if (isset($_SESSION['cart'])) {
                                 <?php echo $_SESSION['tenkh']; ?>
                             </button>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="#">Đơn hàng của tôi</a>
+                                <a class="dropdown-item" href="order_history.php">Đơn hàng của tôi</a>
                                 <a class="dropdown-item" href="#">Tài khoản của tôi</a>
                                 <a class="dropdown-item" href="logout.php?redirect=<?php echo $_SERVER['REQUEST_URI']; ?>">Đăng xuất</a>
                             </div>
