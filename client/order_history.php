@@ -1,27 +1,35 @@
+<?php
+if (session_id() === '')
+  session_start();
+if (!isset($_SESSION['mskh'])) {
+  header('location:index.php');
+  exit;
+}
+$mskh = $_SESSION['mskh'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+<?php
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-  <link rel="stylesheet" href="../client/css/sweetalert2.min.css">
-  <link rel="stylesheet" href="../client/css/snackbar.css" />
-  <link rel="stylesheet" href="../client/css/index.css" />
-  <title>Lịch sử đặt hàng</title>
+$title = "Lịch sử đặt hàng";
+require('../database/connect.php');
+require('../database/repository.php');
+include_once('components/import_header.php');
 
-</head>
+$active_order_sql = "SELECT * FROM dathang h JOIN diachikh d ON d.MaDC=h.MaDC WHERE h.MSKH=" . $mskh . " AND TrangThaiDH=1 ORDER BY h.NgayDH DESC";
+$active_order = getList($conn, $active_order_sql);
+$non_active_order_sql = "SELECT * FROM dathang h JOIN diachikh d ON d.MaDC=h.MaDC WHERE h.MSKH=" . $mskh . " AND h.TrangThaiDH=0 ORDER BY h.NgayDH DESC";
+$non_active_order = getList($conn, $non_active_order_sql);
+
+?>
 
 <body>
   <?php include_once('components/header.php');  ?>
-  <div class="container-fluid w-100">
+  <div class="container">
     <div class="container-fluid pt-2 mt-5">
-      <div class="row">
-        <div class="col-md-6 grid-margin stretch-card">
-
+      <div class="row mb-4">
+        <div class="col-md-12 grid-margin stretch-card">
           <div class="card">
             <div class="card-body">
               <div class="d-flex justify-content-between">
@@ -38,12 +46,26 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>101</td>
-                      <td>18/11/2021 | 23:00</td>
-                      <td> Khóm 2 Thị trấn Đầm Dơi </td>
-                      <td>23.000.000</td>
-                    </tr>
+                    <?php
+                    foreach ($non_active_order as $order) {
+                      $ngaydat = date_create($order["NgayDH"]);
+                      $order_id = $order["SoDonDH"];
+                      $total_price_sql = "SELECT SUM((c.GiaDatHang*c.SoLuong)) AS total FROM chitietdathang c WHERE SoDonDH=" . $order_id;
+                      $total_price = (int) getList($conn, $total_price_sql)[0]["total"];
+                      $address = $order['DiaChi'];
+                      $address = strlen($address) > 95 ? substr($address, 0, 95) . "..." : $address;
+                      ?>
+                      <tr>
+                        <td>
+                          <a class="reset-anchor d-block animsition-link" href="order_detail.php?id=<?php echo $order['SoDonDH']; ?>">
+                            #<?php echo $order['SoDonDH']; ?>
+                          </a>
+                        </td>
+                        <td><?php echo date_format($ngaydat, 'd/m/Y | H:i:s'); ?></td>
+                        <td><?php echo $address; ?></td>
+                        <td><?php echo number_format($total_price); ?></td>
+                      </tr>
+                    <?php  } ?>
                   </tbody>
                 </table>
               </div>
@@ -51,7 +73,10 @@
           </div>
 
         </div>
-        <div class="col-md-6 grid-margin stretch-card">
+
+      </div>
+      <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
           <div class="card">
             <div class="card-body">
               <div class="d-flex justify-content-between">
@@ -68,12 +93,25 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>101</td>
-                      <td>18/11/2021 | 23:00</td>
-                      <td> Khóm 2 Thị trấn Đầm Dơi </td>
-                      <td>23.000.000</td>
-                    </tr>
+                    <?php
+                    foreach ($active_order as $order) {
+                      $ngaydat = date_create($order["NgayDH"]);
+                      $order_id = $order["SoDonDH"];
+                      $total_price_sql = "SELECT SUM((c.GiaDatHang*c.SoLuong)) AS total FROM chitietdathang c WHERE SoDonDH=" . $order_id;
+                      $total_price = (int) getList($conn, $total_price_sql)[0]["total"];
+                      $address = $order['DiaChi'];
+                      $address = strlen($address) > 95 ? substr($address, 0, 95) . "..." : $address;
+                      ?>
+                      <tr>
+                        <td><a class="reset-anchor d-block animsition-link" href="order_detail.php?id=<?php echo $order['SoDonDH']; ?>">
+                            #<?php echo $order['SoDonDH']; ?>
+                          </a>
+                        </td>
+                        <td><?php echo date_format($ngaydat, 'd/m/Y | H:i:s'); ?></td>
+                        <td><?php echo $address; ?></td>
+                        <td><?php echo number_format($total_price); ?></td>
+                      </tr>
+                    <?php  } ?>
                   </tbody>
                 </table>
               </div>
@@ -84,6 +122,10 @@
     </div>
   </div>
 
+
+
+
+  <?php include_once('components/import_footer.php');  ?>
 </body>
 
 </html>

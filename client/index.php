@@ -103,29 +103,6 @@ $total_page = ceil(getOne($conn, $count_query) / (float) $itemsPerPage);
 
               </div>
             </div>
-            <!-- <div class="row border-bottom pl-0">
-              <div class="col-md-6 col-lg-12 py-3 pl-5 pr-5">
-                <strong class="mb-5">Khoảng giá</strong>
-                <div class="mt-3">
-                  <div class="form-row">
-                    <div class="col mr-3 ">
-                      <div class="input-group">
-                        <input type="text" class="form-control input-rounded" placeholder="Min">
-                      </div>
-
-                    </div>
-                    <div class="col">
-                      <input type="text" class="form-control input-rounded" placeholder="Max">
-                    </div>
-                  </div>
-                </div>
-                <div class="row mt-4">
-                  <div class="col-lg-12">
-                    <button type="button" class="btn medium-primary-btn btn-block">Áp dụng</button>
-                  </div>
-                </div>
-              </div>
-            </div> -->
           </div>
           <!-- main content -->
           <div class="col-lg-9 mx-5">
@@ -212,10 +189,10 @@ $total_page = ceil(getOne($conn, $count_query) / (float) $itemsPerPage);
                     <div class="view overlay">
                       <?php
                         $image_query = "SELECT * FROM hinhhanghoa WHERE MSHH=" . $row["MSHH"];
-                        $image = getList($conn, $image_query);
+                        $image = getList($conn, $image_query)[0];
                         ?>
-                      <img src="../assets/images/products/<?php echo $image[0]["TenHinh"]; ?>" height="250" width="250" class="">
-                      <input type="hidden" id="image_<?php echo $row['MSHH']; ?>" value="<?php echo $image[0]["TenHinh"]; ?>" />
+                      <img src="../assets/images/products/<?php echo $image["TenHinh"]; ?>" height="250" width="250" class="">
+                      <input type="hidden" id="image_<?php echo $row['MSHH']; ?>" value="<?php echo $image["TenHinh"]; ?>" />
                     </div>
                     <div class="card-body">
                       <h5 class="card-title mb-1">

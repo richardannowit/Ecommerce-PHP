@@ -33,7 +33,6 @@ $order_list = getList($conn, $order_sql);
                     <?php
                     foreach ($order_list as $order) {
                       $ngaygiao = date_create($order["NgayDH"]);
-                      $order_id = $order["SoDonDH"];
                       $customer_sql = "SELECT * FROM khachhang WHERE MSKH=" . $order["MSKH"];
                       $customer = getList($conn, $customer_sql)[0];
 
@@ -41,6 +40,7 @@ $order_list = getList($conn, $order_sql);
                       $address = getList($conn, $address_sql)[0]["DiaChi"];
                       $address = strlen($address) > 45 ? substr($address, 0, 45) . "..." : $address;
 
+                      $order_id = $order["SoDonDH"];
                       $total_price_sql = "SELECT SUM((c.GiaDatHang*c.SoLuong)) AS total FROM chitietdathang c WHERE SoDonDH=" . $order_id;
                       $total_price = (int) getList($conn, $total_price_sql)[0]["total"];
 
