@@ -73,7 +73,7 @@ include_once('components/import_header.php');
               <li class="border-bottom my-2"></li>
               <li class="d-flex align-items-center justify-content-between">
                 <strong class="text-uppercase small font-weight-bold">Tình trạng</strong>
-                <span class="total-cart"><?php echo $order_detail['TrangThaiDH'] == 0 ? 'Chưa xử lý' : 'Đã xử lý'; ?></span>
+                <span class="total-cart"><?php echo $order_detail['TrangThaiDH'] == 0 ? 'Chưa xử lý' : ($order_detail['NgayGH'] == null ? "Đã xử lý" : "Đã giao"); ?></span>
               </li>
             </ul>
           </div>

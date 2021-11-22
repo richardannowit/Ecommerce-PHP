@@ -51,7 +51,7 @@ $order_list = getList($conn, $order_sql);
                         <td><?php echo $customer["SoDienThoai"]; ?></td>
                         <td><?php echo date_format($ngaygiao, 'd/m/Y | H:i:s'); ?></td>
                         <td><?php echo number_format($total_price); ?></td>
-                        <td><?php echo $order["TrangThaiDH"] == 0 ? "Chưa xử lý" : "Đã xử lý"; ?></td>
+                        <td><?php echo $order["TrangThaiDH"] == 0 ? "Chưa xử lý" : ($order['NgayGH'] == null ? "Đã xử lý" : "Đã giao"); ?></td>
                         <td><?php echo $address; ?></td>
                         <td>
                           <a href="order_detail.php?id=<?php echo $order['SoDonDH']; ?>">
@@ -59,7 +59,7 @@ $order_list = getList($conn, $order_sql);
                               <i class="ti-pencil-alt mx-0"></i>
                             </button>
                           </a>
-                          <button type="button" class="btn btn-danger btn-rounded btn-icon px-0" style="color: white; margin-left: 10px;">
+                          <button type="button" delete_id="<?php echo $order["SoDonDH"]; ?>" class="btn btn-danger btn-rounded btn-icon px-0 delete" style="color: white; margin-left: 10px;">
                             <i class="ti-trash mx-0"></i>
                           </button>
                         </td>
@@ -79,5 +79,49 @@ $order_list = getList($conn, $order_sql);
 
 
 <script>
-  // $('#orderTable').dataTable();
+  function delete_order(id) {
+    Swal.fire({
+      title: 'Xác nhận xoá?',
+      text: "Bạn có chắc chắn muốn xoá đơn hàng này không!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Xác nhận',
+      cancelButtonText: 'Huỷ'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $.ajax({
+          type: "POST",
+          url: "delete_order.php",
+          data: {
+            order_id: id,
+            delete: "Click",
+          },
+          success: function(result) {
+            Swal.fire(
+              'Thành công!',
+              'Đơn hàng đã được xoá thành công.',
+              'success'
+            ).then((res) => {
+              location.reload(true);
+            });
+          },
+          error: function(result) {
+            Swal.fire(
+              'Thất bại!',
+              'Xoá đơn hàng thất bại.',
+              'error'
+            );
+          }
+        });
+      }
+    })
+  }
+  $(document).ready(function() {
+    $(".delete").click(function(e) {
+      var id = $(this).attr("delete_id");
+      delete_order(id);
+    });
+  });
 </script>
