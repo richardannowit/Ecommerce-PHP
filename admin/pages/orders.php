@@ -19,7 +19,7 @@ $order_list = getList($conn, $order_sql);
                 <table id="orders-table" class="table dataTable no-footer expandable-table table-hover" style="width: 100%;" role="grid">
                   <thead>
                     <tr role="row">
-                      <th class="sorting" aria-controls="orders-table" rowspan="1" colspan="1" aria-sort="ascending" style="width: 25px;">Mã đơn hàng</th>
+                      <th class="sorting_desc" aria-controls="orders-table" rowspan="1" colspan="1" aria-sort="ascending" style="width: 25px;">Mã đơn hàng</th>
                       <th class="sorting_asc" aria-controls="orders-table" rowspan="1" colspan="1" aria-sort="ascending" style="width: 103px;">Tên khách hàng</th>
                       <th tabindex="0" aria-controls="orders-table" rowspan="1" colspan="1" style="width: 111px;">Số điện thoại</th>
                       <th tabindex="0" aria-controls="orders-table" rowspan="1" colspan="1" style="width: 132px;">Ngày đặt hàng</th>
@@ -46,7 +46,7 @@ $order_list = getList($conn, $order_sql);
 
                       ?>
                       <tr>
-                        <td><?php echo $order["SoDonDH"]; ?></td>
+                        <td><a href="order_detail.php?id=<?php echo $order['SoDonDH']; ?>" style="text-decoration: none;">#<?php echo $order["SoDonDH"]; ?></a></td>
                         <td><?php echo $customer["HoTenKH"]; ?></td>
                         <td><?php echo $customer["SoDienThoai"]; ?></td>
                         <td><?php echo date_format($ngaygiao, 'd/m/Y | H:i:s'); ?></td>
@@ -54,9 +54,11 @@ $order_list = getList($conn, $order_sql);
                         <td><?php echo $order["TrangThaiDH"] == 0 ? "Chưa xử lý" : "Đã xử lý"; ?></td>
                         <td><?php echo $address; ?></td>
                         <td>
-                          <button type="button" class="btn btn-primary btn-icon btn-rounded px-0">
-                            <i class="ti-pencil-alt mx-0"></i>
-                          </button>
+                          <a href="order_detail.php?id=<?php echo $order['SoDonDH']; ?>">
+                            <button type="button" class="btn btn-primary btn-icon btn-rounded px-0">
+                              <i class="ti-pencil-alt mx-0"></i>
+                            </button>
+                          </a>
                           <button type="button" class="btn btn-danger btn-rounded btn-icon px-0" style="color: white; margin-left: 10px;">
                             <i class="ti-trash mx-0"></i>
                           </button>

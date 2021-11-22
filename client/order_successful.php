@@ -31,7 +31,7 @@ if (session_id() === '')
                         if (isset($_SESSION['mskh'])) {
                             ?>
                             <p class="">Kiểm tra đơn hàng của bạn trong mục
-                                <a href="#" class="font-weight-bold text-decoration-none">
+                                <a href="order_history.php" class="font-weight-bold text-decoration-none">
                                     Đơn hàng của tôi
                                 </a>
 
