@@ -1,3 +1,9 @@
+<?php
+$nhanvien_query = "SELECT * FROM nhanvien";
+$nhanvien_list = getList($conn, $nhanvien_query);
+
+
+?>
 <div class="row">
   <div class="col-md-12 grid-margin stretch-card">
     <div class="card">
@@ -25,38 +31,27 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr class="odd">
-                      <td>0000001</td>
-                      <td>Trần Đăng Khoa</td>
-                      <td>Giám đốc</td>
-                      <td>Cần Thơ</td>
-                      <td>09848575757</td>
-                      <td>
-                        <button type="button" class="btn btn-primary btn-icon btn-rounded px-0">
-                          <i class="ti-pencil-alt mx-0"></i>
-                        </button>
-                        <button type="button" class="btn btn-danger btn-rounded btn-icon px-0" style="color: white; margin-left: 10px;">
-                          <i class="ti-trash mx-0"></i>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr class="even">
-                      <td>0000002</td>
-                      <td>Trần Đăng Khoa 2</td>
-                      <td>Nhân viên</td>
-                      <td>Cần Thơ</td>
-                      <td>09848575757</td>
-                      <td>
-                        <button type="button" class="btn btn-primary btn-icon btn-rounded px-0">
-                          <i class="ti-pencil-alt mx-0"></i>
-                        </button>
-                        <button type="button" class="btn btn-danger btn-rounded btn-icon px-0" style="color: white; margin-left: 10px;">
-                          <i class="ti-trash mx-0"></i>
-                        </button>
-                      </td>
-                    </tr>
-
-
+                    <?php
+                    foreach ($nhanvien_list as $row) {
+                      ?>
+                      <tr>
+                        <td>#<?php echo $row['MSNV']; ?></td>
+                        <td><?php echo $row['HoTenNV']; ?></td>
+                        <td><?php echo $row['ChucVu']; ?></td>
+                        <td><?php echo $row['DiaChi']; ?></td>
+                        <td><?php echo $row['SoDienThoai']; ?></td>
+                        <td>
+                          <a href="edit_nhanvien.php?id=<?php echo $row['MSNV']; ?>">
+                            <button type="button" class="btn btn-primary btn-icon btn-rounded px-0">
+                              <i class="ti-pencil-alt mx-0"></i>
+                            </button>
+                          </a>
+                          <button type="button" delete_id="<?php echo $row["MSNV"]; ?>" class="btn btn-danger btn-rounded btn-icon px-0 delete" style="color: white; margin-left: 10px;">
+                            <i class="ti-trash mx-0"></i>
+                          </button>
+                        </td>
+                      </tr>
+                    <?php } ?>
                   </tbody>
                 </table>
               </div>
@@ -67,3 +62,62 @@
     </div>
   </div>
 </div>
+
+
+
+<script>
+  function delete_nhanvien(id) {
+    Swal.fire({
+      title: 'Xác nhận xoá?',
+      text: "Bạn có chắc chắn muốn xoá sản phẩm này không!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Xác nhận',
+      cancelButtonText: 'Huỷ'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $.ajax({
+          type: "POST",
+          url: "delete_nhanvien.php",
+          data: {
+            nhanvien_id: id,
+            delete: "Click",
+          },
+          success: function(result) {
+            if (result === '1') {
+              Swal.fire(
+                'Thành công!',
+                'Đã xoá nhân viên thành công.',
+                'success'
+              ).then((res) => {
+                location.reload(true);
+              });
+            } else {
+              Swal.fire(
+                'Thất bại!',
+                'Xoá nhân viên thất bại, do nhân viên này có đơn hàng xử lý.',
+                'error'
+              );
+            }
+
+          },
+          error: function(result) {
+            Swal.fire(
+              'Thất bại!',
+              'Xoá nhân viên thất bại.',
+              'error'
+            );
+          }
+        });
+      }
+    })
+  }
+  $(document).ready(function() {
+    $(".delete").click(function(e) {
+      var id = $(this).attr("delete_id");
+      delete_nhanvien(id);
+    });
+  });
+</script>
