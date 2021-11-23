@@ -42,7 +42,7 @@ if (isset($_SESSION['cart'])) {
                             </button>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="order_history.php">Đơn hàng của tôi</a>
-                                <a class="dropdown-item" href="#">Tài khoản của tôi</a>
+                                <a class="dropdown-item" href="user_info.php">Tài khoản của tôi</a>
                                 <a class="dropdown-item" href="logout.php?redirect=<?php echo $_SERVER['REQUEST_URI']; ?>">Đăng xuất</a>
                             </div>
                         <?php } else { ?>
