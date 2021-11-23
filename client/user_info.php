@@ -123,7 +123,7 @@ if (isset($_POST['update'])) {
                       <div class="row">
                         <div class="col-lg-12 form-group">
                           <label class="text-small " for="fax">Số FAX</label>
-                          <input class="form-control " pattern="[0-9]+" name="fax" id="fax" type="tel" value="<?php echo $user['fax']; ?>">
+                          <input class="form-control " name="fax" id="fax" type="tel" value="<?php echo $user['fax']; ?>">
                         </div>
                       </div>
                       <div class="row justify-content-between">
