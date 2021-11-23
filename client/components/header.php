@@ -12,7 +12,9 @@ if (isset($_SESSION['cart'])) {
 <header class="bs4header bg-primary " style="box-shadow: 0px 5px 21px -5px #cdd1e1;">
     <div class="container-fluid">
         <nav class="navbar navbar-expand-lg navbar-dark">
-            <a class="navbar-brand" href="index.php"><b><i>Khoa Tech</i></b></a>
+            <a class="navbar-brand" href="index.php">
+                <img src="../assets/E-KHOA.svg" width="250" height="50" alt="logo">
+            </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs4navbar" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -22,7 +24,7 @@ if (isset($_SESSION['cart'])) {
                         <a class="nav-link active" href="index.php">Trang chủ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Liên hệ</a>
+                        <a class="nav-link" href="about_me.php">Tác giả</a>
                     </li>
                     <li class="nav-item px-3 text-uppercase mb-0 position-relative d-lg-flex">
                         <div id="cart" class="d-none">

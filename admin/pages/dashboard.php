@@ -11,6 +11,14 @@ $non_active_order_sql = "SELECT * FROM dathang h WHERE h.TrangThaiDH=0";
 $non_active_order = getList($conn, $non_active_order_sql);
 
 
+
+$customer_query = "SELECT * FROM khachhang";
+$customer_count = count(getList($conn, $customer_query));
+$product_query = "SELECT * FROM hanghoa";
+$product_count_total = count(getList($conn, $product_query));
+$order_sql = "SELECT * FROM dathang";
+$order_count = count(getList($conn, $order_sql));
+
 $price_sql = "SELECT SUM((GiaDatHang * SoLuong)) AS PRICE FROM chitietdathang";
 $total_price = getList($conn, $price_sql)[0]["PRICE"];
 
@@ -95,7 +103,7 @@ $today = date_format($today, 'd/m/Y');
           <div class="card card-dark-blue bg-warning">
             <div class="card-body">
               <p class="mb-4">Tổng số đơn hàng</p>
-              <p class="fs-30 mb-2"><?php echo count($order_list); ?></p>
+              <p class="fs-30 mb-2"><?php echo $order_count; ?></p>
               <p>22.12% (30 ngày)</p>
             </div>
           </div>
@@ -106,7 +114,7 @@ $today = date_format($today, 'd/m/Y');
           <div class="card card-light-blue bg-success">
             <div class="card-body">
               <p class="mb-4">Số lượng hàng hoá</p>
-              <p class="fs-30 mb-2"><?php echo count($product_list); ?></p>
+              <p class="fs-30 mb-2"><?php echo $product_count_total; ?></p>
               <p>2.00% (30 ngày)</p>
             </div>
           </div>
@@ -115,7 +123,7 @@ $today = date_format($today, 'd/m/Y');
           <div class="card card-light-danger">
             <div class="card-body">
               <p class="mb-4">Số người dùng đã mua hàng</p>
-              <p class="fs-30 mb-2"><?php echo count($customer_list); ?></p>
+              <p class="fs-30 mb-2"><?php echo $customer_count; ?></p>
               <p>0.22% (30 ngày)</p>
             </div>
           </div>
@@ -229,8 +237,6 @@ $today = date_format($today, 'd/m/Y');
                     </thead>
                     <tbody>
                       <?php
-                      $order_sql = "SELECT * FROM dathang";
-                      $order_list = getList($conn, $order_sql);
                       foreach ($order_list as $order) {
                         $ngaygiao = date_create($order["NgayDH"]);
                         $customer_sql = "SELECT * FROM khachhang WHERE MSKH=" . $order["MSKH"];

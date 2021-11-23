@@ -80,7 +80,7 @@ if (isset($_POST['signup'])) {
             <div class="col-lg-4 mx-auto">
               <div class="auth-form-light text-left py-5 px-4 px-sm-5">
                 <div class="brand-logo">
-                  <img src="../assets/logo.svg" alt="logo">
+                  <img src="../assets/E-KHOA-2.svg" style="height:100%; width: 500px; margin-left: -50px;">
                 </div>
                 <h3>ĐĂNG KÝ TÀI KHOẢN</h3>
                 <h6 class="font-weight-light mb-3">Hãy đăng ký tài khoản để lưu thông tin các đơn hàng.</h6>
