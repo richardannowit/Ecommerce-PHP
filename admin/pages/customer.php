@@ -15,15 +15,15 @@ $khachhang_list = getList($conn, $khachhang_query);
           <div class="col-12">
             <div class="row">
               <div class="col-sm-12">
-                <table id="orders-table" class="table dataTable no-footer expandable-table table-hover" style="width: 100%;" role="grid">
+                <table id="customerTable" class="table dataTable no-footer expandable-table table-hover" style="width: 100%;" role="grid">
                   <thead>
                     <tr role="row">
-                      <th class="sorting_asc" aria-controls="orders-table" rowspan="1" colspan="1" aria-sort="ascending" style="width: 25px;">Mã khách hàng</th>
-                      <th class="sorting_asc" aria-controls="orders-table" rowspan="1" colspan="1" aria-sort="ascending" style="width: 103px;">Họ và tên</th>
-                      <th tabindex="0" aria-controls="orders-table" rowspan="1" colspan="1" style="width: 111px;">Số điện thoại</th>
-                      <th tabindex="0" aria-controls="orders-table" rowspan="1" colspan="1" style="width: 132px;">Email</th>
-                      <th tabindex="0" aria-controls="orders-table" rowspan="1" colspan="1" style="width: 119px;">Tên công ty</th>
-                      <th tabindex="0" aria-controls="orders-table" rowspan="1" colspan="1" style="width: 119px;">Số FAX</th>
+                      <th class="sorting_asc" aria-controls="customerTable" rowspan="1" colspan="1" aria-sort="ascending" style="width: 25px;">Mã khách hàng</th>
+                      <th class="sorting_asc" aria-controls="customerTable" rowspan="1" colspan="1" aria-sort="ascending" style="width: 103px;">Họ và tên</th>
+                      <th tabindex="0" aria-controls="customerTable" rowspan="1" colspan="1" style="width: 111px;">Số điện thoại</th>
+                      <th tabindex="0" aria-controls="customerTable" rowspan="1" colspan="1" style="width: 132px;">Email</th>
+                      <th tabindex="0" aria-controls="customerTable" rowspan="1" colspan="1" style="width: 119px;">Tên công ty</th>
+                      <th tabindex="0" aria-controls="customerTable" rowspan="1" colspan="1" style="width: 119px;">Số FAX</th>
                       <th style="width: 40px;">Công cụ</th>
                     </tr>
                   </thead>
@@ -32,7 +32,7 @@ $khachhang_list = getList($conn, $khachhang_query);
                     foreach ($khachhang_list as $row) {
                       ?>
                       <tr>
-                        <td><a href="customer_detail.php?id=<?php echo $row['MSKH']; ?>">#<?php echo $row['MSKH']; ?></a></td>
+                        <td><a href="customer_detail.php?id=<?php echo $row['MSKH']; ?>"><?php echo $row['MSKH']; ?></a></td>
                         <td><?php echo $row['HoTenKH']; ?></td>
                         <td><?php echo $row['SoDienThoai']; ?></td>
                         <td><?php echo $row['Email']; ?></td>
@@ -110,6 +110,13 @@ $khachhang_list = getList($conn, $khachhang_query);
     })
   }
   $(document).ready(function() {
+    $('#customerTable').DataTable({
+      info: false,
+      "bLengthChange": false,
+      "order": [
+        [0, "desc"]
+      ]
+    });
     $(".delete").click(function(e) {
       var id = $(this).attr("delete_id");
       delete_nhanvien(id);

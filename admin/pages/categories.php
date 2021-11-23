@@ -36,7 +36,7 @@ $category_list = getList($conn, $category_query);
                     foreach ($category_list as $row) {
                       ?>
                       <tr>
-                        <td><?php echo $row["MaLoaiHang"]; ?></td>
+                        <td><a href="edit_category.php?id=<?php echo $row["MaLoaiHang"]; ?>"><?php echo $row["MaLoaiHang"]; ?></a></td>
                         <td><?php echo $row["TenLoaiHang"]; ?></td>
                         <td>
                           <a href="edit_category.php?id=<?php echo $row["MaLoaiHang"]; ?>">

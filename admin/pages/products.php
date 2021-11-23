@@ -22,15 +22,15 @@ $product_list = getList($conn, $product_query);
           <div class="col-12">
             <div class="row">
               <div class="col-sm-12">
-                <table id="orders-table" class="table dataTable no-footer expandable-table table-hover" style="width: 100%;" role="grid">
+                <table id="productTable" class="table dataTable no-footer expandable-table table-hover" style="width: 100%;" role="grid">
                   <thead>
                     <tr role="row">
-                      <th class="sorting_asc" aria-controls="orders-table" rowspan="1" colspan="1" aria-sort="ascending" style="width: 25px;">Mã hàng hoá</th>
-                      <th class="sorting_asc" aria-controls="orders-table" rowspan="1" colspan="1" aria-sort="ascending" style="width: 103px;">Tên hàng hoá</th>
-                      <th tabindex="0" aria-controls="orders-table" rowspan="1" colspan="1" style="width: 111px;">Loại hàng hoá</th>
-                      <th tabindex="0" aria-controls="orders-table" rowspan="1" colspan="1" style="width: 132px;">Số lượng hàng</th>
-                      <th tabindex="0" aria-controls="orders-table" rowspan="1" colspan="1" style="width: 119px;">Giá</th>
-                      <th tabindex="0" aria-controls="orders-table" rowspan="1" colspan="1" style="width: 90px;">Tình trạng</th>
+                      <th class="sorting_asc" aria-controls="productTable" rowspan="1" colspan="1" aria-sort="ascending" style="width: 25px;">Mã hàng hoá</th>
+                      <th class="sorting_asc" aria-controls="productTable" rowspan="1" colspan="1" aria-sort="ascending" style="width: 103px;">Tên hàng hoá</th>
+                      <th tabindex="0" aria-controls="productTable" rowspan="1" colspan="1" style="width: 111px;">Loại hàng hoá</th>
+                      <th tabindex="0" aria-controls="productTable" rowspan="1" colspan="1" style="width: 132px;">Số lượng hàng</th>
+                      <th tabindex="0" aria-controls="productTable" rowspan="1" colspan="1" style="width: 119px;">Giá</th>
+                      <th tabindex="0" aria-controls="productTable" rowspan="1" colspan="1" style="width: 90px;">Tình trạng</th>
                       <th style="width: 100px;">Công cụ</th>
                     </tr>
                   </thead>
@@ -39,7 +39,7 @@ $product_list = getList($conn, $product_query);
                     foreach ($product_list as $row) {
                       ?>
                       <tr>
-                        <td><?php echo $row["MSHH"]; ?></td>
+                        <td><a href="edit_product.php?id=<?php echo $row['MSHH']; ?>"><?php echo $row["MSHH"]; ?></a></td>
                         <td><?php echo $row["TenHH"]; ?></td>
                         <td><?php echo $row["TenLoaiHang"]; ?></td>
                         <td><?php echo $row["SoLuongHang"]; ?></td>
@@ -115,6 +115,13 @@ $product_list = getList($conn, $product_query);
     })
   }
   $(document).ready(function() {
+    $('#productTable').DataTable({
+      info: false,
+      "bLengthChange": false,
+      "order": [
+        [0, "desc"]
+      ]
+    });
     $(".delete").click(function(e) {
       var id = $(this).attr("delete_id");
       delete_product(id);

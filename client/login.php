@@ -61,48 +61,49 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
   <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
-  <div class="container-scroller">
-    <div class="container-fluid page-body-wrapper full-page-wrapper">
-      <div class="content-wrapper d-flex align-items-center auth px-0">
-        <div class="row w-100 mx-0">
-          <div class="col-lg-4 mx-auto">
-            <div class="auth-form-light text-left py-5 px-4 px-sm-5">
-              <div class="brand-logo">
-                <img src="../assets/logo.svg" alt="logo">
+<body class="d-flex flex-column">
+  <div class="flex-grow-1 flex-shrink-0">
+    <div class="container-scroller">
+      <div class="container-fluid page-body-wrapper">
+        <div class="content-wrapper d-flex align-items-center auth px-0">
+          <div class="row w-100 mx-0">
+            <div class="col-lg-4 mx-auto">
+              <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+                <div class="brand-logo">
+                  <img src="../assets/logo.svg" alt="logo">
+                </div>
+                <h3>ĐĂNG NHẬP</h3>
+                <h6 class="font-weight-light mb-3">Vui lòng đăng nhập để tiếp tuc.</h6>
+                <p class="card-description">
+                  <?php echo $message; ?>
+                </p>
+                <form class="" action="" method="POST">
+                  <div class="form-group">
+                    <label for="username"><b>Số điện thoại: </b></label>
+                    <input required type="text" name="username" class="form-control form-control-lg" id="username" placeholder="Nhập số điện thoại">
+                  </div>
+                  <div class="form-group">
+                    <label for="password"><b>Mật khẩu: </b></label>
+                    <input required type="password" name="password" class="form-control form-control-lg" id="password" placeholder="Nhập mật khẩu">
+                  </div>
+                  <div class="my-2 d-flex justify-content-between align-items-center">
+                    <a href="index.php" name="login" class="text-primary">Về trang chủ</a>
+                    <button type="submit" name="login" class="btn btn-primary font-weight-medium">ĐĂNG NHẬP</button>
+                  </div>
+                  <div class="text-center mt-4 font-weight-light">
+                    Bạn chưa có tài khoản? <a href="signup.php" class="text-primary">Đăng ký</a>
+                  </div>
+                </form>
               </div>
-              <h3>ĐĂNG NHẬP</h3>
-              <h6 class="font-weight-light mb-3">Vui lòng đăng nhập để tiếp tuc.</h6>
-              <p class="card-description">
-                <?php echo $message; ?>
-              </p>
-              <form class="" action="" method="POST">
-                <div class="form-group">
-                  <label for="username"><b>Số điện thoại: </b></label>
-                  <input required type="text" name="username" class="form-control form-control-lg" id="username" placeholder="Nhập số điện thoại">
-                </div>
-                <div class="form-group">
-                  <label for="password"><b>Mật khẩu: </b></label>
-                  <input required type="password" name="password" class="form-control form-control-lg" id="password" placeholder="Nhập mật khẩu">
-                </div>
-                <div class="my-2 d-flex justify-content-between align-items-center">
-                  <a href="index.php" name="login" class="text-primary">Về trang chủ</a>
-                  <button type="submit" name="login" class="btn btn-primary font-weight-medium">ĐĂNG NHẬP</button>
-                </div>
-                <div class="text-center mt-4 font-weight-light">
-                  Bạn chưa có tài khoản? <a href="signup.php" class="text-primary">Đăng ký</a>
-                </div>
-              </form>
             </div>
           </div>
         </div>
+        <!-- content-wrapper ends -->
       </div>
-      <!-- content-wrapper ends -->
+      <!-- page-body-wrapper ends -->
+
     </div>
-    <!-- page-body-wrapper ends -->
   </div>
-
-
 </body>
 
 </html>

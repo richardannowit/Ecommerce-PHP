@@ -16,16 +16,16 @@ $order_list = getList($conn, $order_sql);
           <div class="col-12">
             <div class="row">
               <div class="col-sm-12">
-                <table id="orders-table" class="table dataTable no-footer expandable-table table-hover" style="width: 100%;" role="grid">
+                <table id="orderTable" class="table dataTable no-footer expandable-table table-hover" style="width: 100%;" role="grid">
                   <thead>
                     <tr role="row">
-                      <th class="sorting_desc" aria-controls="orders-table" rowspan="1" colspan="1" aria-sort="ascending" style="width: 25px;">Mã đơn hàng</th>
-                      <th class="sorting_asc" aria-controls="orders-table" rowspan="1" colspan="1" aria-sort="ascending" style="width: 103px;">Tên khách hàng</th>
-                      <th tabindex="0" aria-controls="orders-table" rowspan="1" colspan="1" style="width: 111px;">Số điện thoại</th>
-                      <th tabindex="0" aria-controls="orders-table" rowspan="1" colspan="1" style="width: 132px;">Ngày đặt hàng</th>
-                      <th itemtype="num" tabindex="0" aria-controls="orders-table" rowspan="1" colspan="1" style="width: 119px;">Tổng tiền (VNĐ)</th>
-                      <th tabindex="0" aria-controls="orders-table" rowspan="1" colspan="1" style="width: 90px;">Tình trạng</th>
-                      <th tabindex="0" aria-controls="orders-table" rowspan="1" colspan="1" style="width: 163px;">Địa chỉ</th>
+                      <th class="sorting_desc" aria-controls="orderTable" rowspan="1" colspan="1" aria-sort="ascending" style="width: 25px;">Mã đơn hàng</th>
+                      <th class="sorting_asc" aria-controls="orderTable" rowspan="1" colspan="1" aria-sort="ascending" style="width: 103px;">Tên khách hàng</th>
+                      <th tabindex="0" aria-controls="orderTable" rowspan="1" colspan="1" style="width: 111px;">Số điện thoại</th>
+                      <th tabindex="0" aria-controls="orderTable" rowspan="1" colspan="1" style="width: 132px;">Ngày đặt hàng</th>
+                      <th itemtype="num" tabindex="0" aria-controls="orderTable" rowspan="1" colspan="1" style="width: 119px;">Tổng tiền (VNĐ)</th>
+                      <th tabindex="0" aria-controls="orderTable" rowspan="1" colspan="1" style="width: 90px;">Tình trạng</th>
+                      <th tabindex="0" aria-controls="orderTable" rowspan="1" colspan="1" style="width: 163px;">Địa chỉ</th>
                       <th style="width: 100px;"></th>
                     </tr>
                   </thead>
@@ -46,7 +46,7 @@ $order_list = getList($conn, $order_sql);
 
                       ?>
                       <tr>
-                        <td><a href="order_detail.php?id=<?php echo $order['SoDonDH']; ?>" style="text-decoration: none;">#<?php echo $order["SoDonDH"]; ?></a></td>
+                        <td><a href="order_detail.php?id=<?php echo $order['SoDonDH']; ?>" style="text-decoration: none;"><?php echo $order["SoDonDH"]; ?></a></td>
                         <td><?php echo $customer["HoTenKH"]; ?></td>
                         <td><?php echo $customer["SoDienThoai"]; ?></td>
                         <td><?php echo date_format($ngaygiao, 'd/m/Y | H:i:s'); ?></td>
@@ -119,6 +119,13 @@ $order_list = getList($conn, $order_sql);
     })
   }
   $(document).ready(function() {
+    $('#orderTable').DataTable({
+      info: false,
+      "bLengthChange": false,
+      "order": [
+        [0, "desc"]
+      ]
+    });
     $(".delete").click(function(e) {
       var id = $(this).attr("delete_id");
       delete_order(id);

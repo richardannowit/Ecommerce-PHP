@@ -71,56 +71,57 @@ if (isset($_POST['signup'])) {
   <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
-  <div class="container-scroller">
-    <div class="container-fluid page-body-wrapper full-page-wrapper">
-      <div class="content-wrapper d-flex align-items-center auth px-0">
-        <div class="row w-100 mx-0">
-          <div class="col-lg-4 mx-auto">
-            <div class="auth-form-light text-left py-5 px-4 px-sm-5">
-              <div class="brand-logo">
-                <img src="../assets/logo.svg" alt="logo">
+<body class="d-flex flex-column">
+  <div class="flex-grow-1 flex-shrink-0">
+    <div class="container-scroller">
+      <div class="container-fluid page-body-wrapper full-page-wrapper">
+        <div class="content-wrapper d-flex align-items-center auth px-0">
+          <div class="row w-100 mx-0">
+            <div class="col-lg-4 mx-auto">
+              <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+                <div class="brand-logo">
+                  <img src="../assets/logo.svg" alt="logo">
+                </div>
+                <h3>ĐĂNG KÝ TÀI KHOẢN</h3>
+                <h6 class="font-weight-light mb-3">Hãy đăng ký tài khoản để lưu thông tin các đơn hàng.</h6>
+                <p class="card-description">
+                  <?php echo $message; ?>
+                </p>
+                <form action="" method="POST">
+                  <div class="form-group">
+                    <label for="name"><b>Họ và tên: </b></label>
+                    <input required type="text" name="name" class="form-control form-control-lg" id="name" placeholder="Nhập tên của bạn">
+                  </div>
+                  <div class="form-group">
+                    <label for="phone"><b>Số điện thoại: </b></label>
+                    <input required class="form-control" name="phone" id="phone" type="tel" placeholder="Nhập số điện thoại">
+                  </div>
+                  <!-- pattern="[0-9]+" -->
+                  <div class="form-group">
+                    <label for="address"><b>Địa chỉ: </b></label>
+                    <input required class="form-control" name="address" id="address" type="text" placeholder="Nhập địa chỉ của bạn">
+                  </div>
+                  <div class="form-group">
+                    <label for="password"><b>Mật khẩu: </b></label>
+                    <input required type="password" name="password" class="form-control form-control-lg" id="password" placeholder="Nhập mật khẩu">
+                  </div>
+                  <div class="my-2 d-flex justify-content-between align-items-center">
+                    <a href="index.php" class="text-primary">Về trang chủ</a>
+                    <button type="submit" name="signup" class="btn btn-primary font-weight-medium">ĐĂNG KÝ</button>
+                  </div>
+                  <div class="text-center mt-4 font-weight-light">
+                    Bạn đã có tài khoản? <a href="login.php" class="text-primary">Đăng nhập</a>
+                  </div>
+                </form>
               </div>
-              <h3>ĐĂNG KÝ TÀI KHOẢN</h3>
-              <h6 class="font-weight-light mb-3">Hãy đăng ký tài khoản để lưu thông tin các đơn hàng.</h6>
-              <p class="card-description">
-                <?php echo $message; ?>
-              </p>
-              <form action="" method="POST">
-                <div class="form-group">
-                  <label for="name"><b>Họ và tên: </b></label>
-                  <input required type="text" name="name" class="form-control form-control-lg" id="name" placeholder="Nhập tên của bạn">
-                </div>
-                <div class="form-group">
-                  <label for="phone"><b>Số điện thoại: </b></label>
-                  <input required class="form-control" name="phone" id="phone" type="tel" placeholder="Nhập số điện thoại">
-                </div>
-                <!-- pattern="[0-9]+" -->
-                <div class="form-group">
-                  <label for="address"><b>Địa chỉ: </b></label>
-                  <input required class="form-control" name="address" id="address" type="text" placeholder="Nhập địa chỉ của bạn">
-                </div>
-                <div class="form-group">
-                  <label for="password"><b>Mật khẩu: </b></label>
-                  <input required type="password" name="password" class="form-control form-control-lg" id="password" placeholder="Nhập mật khẩu">
-                </div>
-                <div class="my-2 d-flex justify-content-between align-items-center">
-                  <a href="index.php" class="text-primary">Về trang chủ</a>
-                  <button type="submit" name="signup" class="btn btn-primary font-weight-medium">ĐĂNG KÝ</button>
-                </div>
-                <div class="text-center mt-4 font-weight-light">
-                  Bạn đã có tài khoản? <a href="login.php" class="text-primary">Đăng nhập</a>
-                </div>
-              </form>
             </div>
           </div>
         </div>
+        <!-- content-wrapper ends -->
       </div>
-      <!-- content-wrapper ends -->
+      <!-- page-body-wrapper ends -->
     </div>
-    <!-- page-body-wrapper ends -->
   </div>
-
 
 </body>
 

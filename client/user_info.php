@@ -53,105 +53,106 @@ if (isset($_POST['update'])) {
   ?>
 </head>
 
-<body>
+<body class="d-flex flex-column">
   <?php include_once('components/header.php');  ?>
 
-
-  <section class="mt-5 mb-4">
-    <div class="container-fluid">
-      <div class="row justify-content-center">
-        <div class="col-lg-12">
-          <div class="row justify-content-around">
-            <div class="col-lg-5 mb-5">
-              <div class="row mb-5">
-                <div class="col-12">
-                  <h4 class="text-uppercase mb-4">Thông tin của bạn</h4>
-                  <p class="card-description">
-                    <?php echo $message_error; ?>
-                  </p>
-                </div>
-                <div class="col-lg-12">
-                  <form action="" method="POST">
-                    <input type="hidden" name="mskh" id="mskh" value="<?php echo $user['MSKH']; ?>" />
-                    <div class="row">
-                      <!-- Họ tên -->
-                      <div class="col-lg-12 form-group">
-                        <label class="text-small " for="name">Họ và tên</label>
-                        <input required class="form-control" id="name" name="name" type="text" value="<?php echo $user['HoTenKH']; ?>">
-                      </div>
-                    </div>
-
-                    <div class="row">
-                      <div class="col-lg-12 form-group">
-                        <label class="text-small " for="phone">Số điện thoại</label>
-                        <input class="form-control" name="phone" id="phone" type="tel" value="<?php echo $user['SoDienThoai']; ?>">
-                      </div>
-                    </div>
-
-                    <div class="row">
-                      <div class="col-lg-12 form-group">
-                        <div class="row justify-content-between">
-                          <div class="col-lg-4 d-flex align-items-center">
-                            <label class="text-small " for="address">Địa chỉ nhận hàng</label>
-                          </div>
-                          <div class=" mb-1 col-lg-4 d-flex align-items-start justify-content-end ">
-                            <button type="button" id="add_address" class="btn btn-primary btn-sm ">Thêm địa chỉ</button>
-                          </div>
+  <div class="flex-grow-1 flex-shrink-0">
+    <section class="mt-5">
+      <div class="container-fluid">
+        <div class="row justify-content-center">
+          <div class="col-lg-12">
+            <div class="row justify-content-around">
+              <div class="col-lg-5 mb-5">
+                <div class="row mb-5">
+                  <div class="col-12">
+                    <h4 class="text-uppercase mb-4">Thông tin của bạn</h4>
+                    <p class="card-description">
+                      <?php echo $message_error; ?>
+                    </p>
+                  </div>
+                  <div class="col-lg-12">
+                    <form action="" method="POST">
+                      <input type="hidden" name="mskh" id="mskh" value="<?php echo $user['MSKH']; ?>" />
+                      <div class="row">
+                        <!-- Họ tên -->
+                        <div class="col-lg-12 form-group">
+                          <label class="text-small " for="name">Họ và tên</label>
+                          <input required class="form-control" id="name" name="name" type="text" value="<?php echo $user['HoTenKH']; ?>">
                         </div>
+                      </div>
 
-                        <select class="form-control" name="address" id="address">
-                          <?php
-                          foreach ($address as $row) {
-                            ?>
-                            <option value="<?php echo $row["MaDC"]; ?>"><?php echo $row["DiaChi"]; ?></option>
-                          <?php } ?>
-                        </select>
+                      <div class="row">
+                        <div class="col-lg-12 form-group">
+                          <label class="text-small " for="phone">Số điện thoại</label>
+                          <input class="form-control" name="phone" id="phone" type="tel" value="<?php echo $user['SoDienThoai']; ?>">
+                        </div>
                       </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-lg-12 form-group">
-                        <label class="text-small " for="email">Email</label>
-                        <input class="form-control" name="email" id="email" type="email" value="<?php echo $user['Email']; ?>">
+
+                      <div class="row">
+                        <div class="col-lg-12 form-group">
+                          <div class="row justify-content-between">
+                            <div class="col-lg-4 d-flex align-items-center">
+                              <label class="text-small " for="address">Địa chỉ nhận hàng</label>
+                            </div>
+                            <div class=" mb-1 col-lg-4 d-flex align-items-start justify-content-end ">
+                              <button type="button" id="add_address" class="btn btn-primary btn-sm ">Thêm địa chỉ</button>
+                            </div>
+                          </div>
+
+                          <select class="form-control" name="address" id="address">
+                            <?php
+                            foreach ($address as $row) {
+                              ?>
+                              <option value="<?php echo $row["MaDC"]; ?>"><?php echo $row["DiaChi"]; ?></option>
+                            <?php } ?>
+                          </select>
+                        </div>
                       </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-lg-12 form-group">
-                        <label class="text-small " for="company">Tên công ty</label>
-                        <input class="form-control" id="company" name="company" type="text" value="<?php echo $user['TenCongTy']; ?>">
+                      <div class="row">
+                        <div class="col-lg-12 form-group">
+                          <label class="text-small " for="email">Email</label>
+                          <input class="form-control" name="email" id="email" type="email" value="<?php echo $user['Email']; ?>">
+                        </div>
                       </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-lg-12 form-group">
-                        <label class="text-small " for="fax">Số FAX</label>
-                        <input class="form-control " pattern="[0-9]+" name="fax" id="fax" type="tel" value="<?php echo $user['fax']; ?>">
+                      <div class="row">
+                        <div class="col-lg-12 form-group">
+                          <label class="text-small " for="company">Tên công ty</label>
+                          <input class="form-control" id="company" name="company" type="text" value="<?php echo $user['TenCongTy']; ?>">
+                        </div>
                       </div>
-                    </div>
-                    <div class="row justify-content-between">
-                      <div class="col-lg-4">
-                        <a href="index.php">
-                          <button type="button" class="btn medium-secondary-btn btn-block">Quay lại</button>
-                        </a>
+                      <div class="row">
+                        <div class="col-lg-12 form-group">
+                          <label class="text-small " for="fax">Số FAX</label>
+                          <input class="form-control " pattern="[0-9]+" name="fax" id="fax" type="tel" value="<?php echo $user['fax']; ?>">
+                        </div>
                       </div>
-                      <div class="col-lg-4">
-                        <button type="submit" name="update" class="btn medium-primary-btn btn-block">Cập nhật</button>
+                      <div class="row justify-content-between">
+                        <div class="col-lg-4">
+                          <a href="index.php">
+                            <button type="button" class="btn medium-secondary-btn btn-block">Quay lại</button>
+                          </a>
+                        </div>
+                        <div class="col-lg-4">
+                          <button type="submit" name="update" class="btn medium-primary-btn btn-block">Cập nhật</button>
+                        </div>
                       </div>
-                    </div>
-                  </form>
+                    </form>
+                  </div>
                 </div>
               </div>
+
+
             </div>
-
-
           </div>
+
         </div>
-
       </div>
-    </div>
-  </section>
-
+    </section>
+  </div>
 
 
   <?php include_once('components/import_footer.php');  ?>
+  <?php include_once('components/footer.php');  ?>
 
   <script>
     const add_new_address = async (mskh) => {

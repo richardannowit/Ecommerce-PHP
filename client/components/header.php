@@ -9,7 +9,7 @@ if (isset($_SESSION['cart'])) {
 
 ?>
 
-<header class="bs4header bg-primary">
+<header class="bs4header bg-primary " style="box-shadow: 0px 5px 21px -5px #cdd1e1;">
     <div class="container-fluid">
         <nav class="navbar navbar-expand-lg navbar-dark">
             <a class="navbar-brand" href="index.php"><b><i>Khoa Tech</i></b></a>

@@ -5,7 +5,7 @@ $customer_query = "SELECT * FROM khachhang ORDER BY MSKH DESC LIMIT 6";
 $customer_list = getList($conn, $customer_query);
 $product_query = "SELECT * FROM hanghoa ORDER BY MSHH DESC LIMIT 7";
 $product_list = getList($conn, $product_query);
-$order_sql = "SELECT * FROM dathang";
+$order_sql = "SELECT * FROM dathang ORDER BY SoDonDH DESC LIMIT 10";
 $order_list = getList($conn, $order_sql);
 $non_active_order_sql = "SELECT * FROM dathang h WHERE h.TrangThaiDH=0";
 $non_active_order = getList($conn, $non_active_order_sql);
@@ -214,16 +214,16 @@ $today = date_format($today, 'd/m/Y');
             <div class="col-12">
               <div class="row">
                 <div class="col-sm-12">
-                  <table id="example" class="table expandable-table table-hover" style="width: 100%;" role="grid">
+                  <table id="orderTable" class="table expandable-table table-hover" style="width: 100%;" role="grid">
                     <thead>
                       <tr role="row">
-                        <th class="select-checkbox sorting_disabled" rowspan="1" colspan="1" aria-label="Quote#" style="width: 125px;">Mã đơn hàng</th>
-                        <th tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" style="width: 133px;">Tên khách hàng</th>
-                        <th tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 131px;">Số điện thoại</th>
-                        <th tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 132px;">Ngày đặt hàng</th>
-                        <th tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 119px;">Tổng tiền (VNĐ)</th>
-                        <th tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 119px;">Tình trạng</th>
-                        <th tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 143px;">Địa chỉ</th>
+                        <th rowspan="1" colspan="1" aria-label="Quote#" style="width: 125px;">Mã đơn hàng</th>
+                        <th tabindex="0" aria-controls="orderTable" rowspan="1" colspan="1" style="width: 133px;">Tên khách hàng</th>
+                        <th tabindex="0" aria-controls="orderTable" rowspan="1" colspan="1" style="width: 131px;">Số điện thoại</th>
+                        <th tabindex="0" aria-controls="orderTable" rowspan="1" colspan="1" style="width: 132px;">Ngày đặt hàng</th>
+                        <th tabindex="0" aria-controls="orderTable" rowspan="1" colspan="1" style="width: 119px;">Tổng tiền (VNĐ)</th>
+                        <th tabindex="0" aria-controls="orderTable" rowspan="1" colspan="1" style="width: 119px;">Tình trạng</th>
+                        <th tabindex="0" aria-controls="orderTable" rowspan="1" colspan="1" style="width: 143px;">Địa chỉ</th>
                         <th class="details-control sorting_disabled" rowspan="1" colspan="1" aria-label="" style="width: 100px;"></th>
                       </tr>
                     </thead>
@@ -276,3 +276,22 @@ $today = date_format($today, 'd/m/Y');
     </div>
   </div>
 </div>
+
+
+<script>
+  $(document).ready(function() {
+    $('#orderTable').DataTable({
+      searching: false,
+      paging: false,
+      info: false,
+      "bLengthChange": false,
+      "order": [
+        [0, "desc"]
+      ]
+    });
+    $(".delete").click(function(e) {
+      var id = $(this).attr("delete_id");
+      delete_nhanvien(id);
+    });
+  });
+</script>

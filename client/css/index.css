@@ -16,6 +16,11 @@ body {
     /* font-family: 'Nunito','Be Vietnam Pro', sans-serif; */
     font-family: 'Nunito', sans-serif;
     background-color: #ffffff !important;
+    margin: 0;
+    padding: 0;
+}
+html {
+    scroll-behavior: smooth;
 }
 strong{
     font-weight: 700;
@@ -310,3 +315,5 @@ ul li a {
     border-radius: 50%;
   }
 /* Cart icon  */
+
+

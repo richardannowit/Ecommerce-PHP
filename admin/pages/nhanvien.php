@@ -19,14 +19,14 @@ $nhanvien_list = getList($conn, $nhanvien_query);
           <div class="col-12">
             <div class="row">
               <div class="col-sm-12">
-                <table id="orders-table" class="table dataTable no-footer expandable-table table-hover" style="width: 100%;" role="grid">
+                <table id="nhanvienTable" class="table dataTable no-footer expandable-table table-hover" style="width: 100%;" role="grid">
                   <thead>
                     <tr role="row">
-                      <th class="sorting_asc" aria-controls="orders-table" rowspan="1" colspan="1" aria-sort="ascending" style="width: 25px;">Mã nhân viên</th>
-                      <th class="sorting_asc" aria-controls="orders-table" rowspan="1" colspan="1" aria-sort="ascending" style="width: 103px;">Họ và tên</th>
-                      <th tabindex="0" aria-controls="orders-table" rowspan="1" colspan="1" style="width: 111px;">Chức vụ</th>
-                      <th tabindex="0" aria-controls="orders-table" rowspan="1" colspan="1" style="width: 132px;">Địa chỉ</th>
-                      <th tabindex="0" aria-controls="orders-table" rowspan="1" colspan="1" style="width: 119px;">Số điện thoại</th>
+                      <th class="sorting_asc" aria-controls="nhanvienTable" rowspan="1" colspan="1" aria-sort="ascending" style="width: 25px;">Mã nhân viên</th>
+                      <th class="sorting_asc" aria-controls="nhanvienTable" rowspan="1" colspan="1" aria-sort="ascending" style="width: 103px;">Họ và tên</th>
+                      <th tabindex="0" aria-controls="nhanvienTable" rowspan="1" colspan="1" style="width: 111px;">Chức vụ</th>
+                      <th tabindex="0" aria-controls="nhanvienTable" rowspan="1" colspan="1" style="width: 132px;">Địa chỉ</th>
+                      <th tabindex="0" aria-controls="nhanvienTable" rowspan="1" colspan="1" style="width: 119px;">Số điện thoại</th>
                       <th style="width: 100px;">Công cụ</th>
                     </tr>
                   </thead>
@@ -35,7 +35,7 @@ $nhanvien_list = getList($conn, $nhanvien_query);
                     foreach ($nhanvien_list as $row) {
                       ?>
                       <tr>
-                        <td>#<?php echo $row['MSNV']; ?></td>
+                        <td><a href="edit_nhanvien.php?id=<?php echo $row['MSNV']; ?>"><?php echo $row['MSNV']; ?></a></td>
                         <td><?php echo $row['HoTenNV']; ?></td>
                         <td><?php echo $row['ChucVu']; ?></td>
                         <td><?php echo $row['DiaChi']; ?></td>
@@ -115,6 +115,13 @@ $nhanvien_list = getList($conn, $nhanvien_query);
     })
   }
   $(document).ready(function() {
+    $('#nhanvienTable').DataTable({
+      info: false,
+      "bLengthChange": false,
+      "order": [
+        [0, "desc"]
+      ]
+    });
     $(".delete").click(function(e) {
       var id = $(this).attr("delete_id");
       delete_nhanvien(id);
