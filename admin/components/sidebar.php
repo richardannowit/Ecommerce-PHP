@@ -30,6 +30,12 @@
                 <span class="menu-title">Quản lý nhân viên</span>
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link py-3 my-2" href="customer.php">
+                <i class="ti-user menu-icon"></i>
+                <span class="menu-title">Danh sách khách hàng</span>
+            </a>
+        </li>
 
 
     </ul>
