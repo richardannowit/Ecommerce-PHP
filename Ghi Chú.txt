@@ -1,0 +1,24 @@
+* Cấu hình database trong file database/connect.php
+
+* Chỉnh sửa biến $host trong file domain.php cho đúng với tên miền trên máy hiện tại
+    - Mặc định là "http://localhost/B1805879_Tran_Dang_Khoa_BTL-04/"
+    - Chú ý: Có dấu / ở cuối
+    - Nếu có lỗi CSS thì là do đường dẫn này không đúng
+
+
+* Thư mục client là thư mục chứa code của bên khách hàng
+
+* Thư mục admin là toàn bộ code của trang nhân viên (admin)
+
+* Thư mục assets là thư mục chứa tất cả hình ảnh dùng chung cho cả khách hàng và nhân viên (admin) bao gồm cả ảnh của hàng hoá
+
+
+* Tài khoản admin:
+    - Mã nhân viên: 1011
+    - Mật khẩu: 12345678
+
+* Tài khoản người dùng:
+    - Có thể tự đăng ký
+    - Hoặc sử dụng mật khẩu sau:
+        + SĐT:  0947685343
+        + Mật khẩu: 1

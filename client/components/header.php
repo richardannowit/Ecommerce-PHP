@@ -13,7 +13,7 @@ if (isset($_SESSION['cart'])) {
     <div class="container-fluid">
         <nav class="navbar navbar-expand-lg navbar-dark">
             <a class="navbar-brand" href="index.php">
-                <img src="../assets/E-KHOA.svg" width="250" height="50" alt="logo">
+                <img src="../assets/E-KHOA.svg" width="250" alt="logo">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs4navbar" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
