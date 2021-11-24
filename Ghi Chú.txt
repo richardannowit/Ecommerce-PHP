@@ -18,7 +18,7 @@
     - Mật khẩu: 12345678
 
 * Tài khoản người dùng:
-    - Có thể tự đăng ký
+    - Có thể tự đăng ký, sau khi bấm đăng nhập sẽ oó nút đăng ký
     - Hoặc sử dụng mật khẩu sau:
         + SĐT:  0947685343
         + Mật khẩu: 1
