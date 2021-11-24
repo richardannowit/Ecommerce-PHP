@@ -38,6 +38,12 @@ if ($order_detail['NgayGH'] != null) {
 $product_sql = "SELECT * FROM chitietdathang c JOIN hanghoa h ON c.MSHH=h.MSHH WHERE SoDonDH=" . $order_id;
 $products = getList($conn, $product_sql);
 
+
+$address_id = $order_detail['MaDC'];
+
+$address_sql = "SELECT * FROM diachikh WHERE MaDC=" . $address_id;
+$address = getList($conn, $address_sql)[0]["DiaChi"];
+$address = strlen($address) > 80 ? substr($address, 0, 80) . "..." : $address;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -68,6 +74,11 @@ include_once('components/import_header.php');
                 </li>
                 <li class="border-bottom my-2"></li>
                 <li class="d-flex align-items-center justify-content-between mb-4">
+                  <strong class="text-uppercase small font-weight-bold">Địa chỉ</strong>
+                  <span class="total-cart"><?php echo $address; ?></span>
+                </li>
+                <li class="border-bottom my-2"></li>
+                <li class="d-flex align-items-center justify-content-between mb-4">
                   <strong class="text-uppercase small font-weight-bold">Ngày giao hàng</strong>
                   <span class="total-cart"><?php echo $ngaygiao == "" ? 'Chưa giao hàng' : $ngaygiao; ?></span>
                 </li>
@@ -76,6 +87,7 @@ include_once('components/import_header.php');
                   <strong class="text-uppercase small font-weight-bold">Tình trạng</strong>
                   <span class="total-cart"><?php echo $order_detail['TrangThaiDH'] == 0 ? 'Chưa xử lý' : ($order_detail['NgayGH'] == null ? "Đã xử lý" : "Đã giao"); ?></span>
                 </li>
+
               </ul>
             </div>
           </div>
