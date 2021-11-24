@@ -1,7 +1,7 @@
 * Cấu hình database trong file database/connect.php
 
 * Chỉnh sửa biến $host trong file domain.php cho đúng với tên miền trên máy hiện tại
-    - Mặc định là "http://localhost/B1805879_Tran_Dang_Khoa_BTL-04/"
+    - Mặc định là "http://localhost/B1805879_Tran_Dang_Khoa_BTL_04/"
     - Chú ý: Có dấu / ở cuối
     - Nếu có lỗi CSS thì là do đường dẫn này không đúng
 
