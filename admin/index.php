@@ -7,6 +7,8 @@ if (!isset($_SESSION['msnv'])) {
   exit;
 }
 
+$title = "Trang chủ";
+
 
 ?>
 

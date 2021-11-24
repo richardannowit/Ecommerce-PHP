@@ -12,7 +12,7 @@ $mskh = $_SESSION['mskh'];
 
 <?php
 
-$title = "Lịch sử đặt hàng";
+$title = "Lịch sử mua hàng";
 require('../database/connect.php');
 require('../database/repository.php');
 include_once('components/import_header.php');

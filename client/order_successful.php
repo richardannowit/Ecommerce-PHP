@@ -11,7 +11,7 @@ if (session_id() === '')
 <head>
     <?php
 
-    $title = "Đặt hàng";
+    $title = "Đặt hàng thành công";
     include_once('components/import_header.php');
 
     ?>

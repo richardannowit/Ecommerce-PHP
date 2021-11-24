@@ -6,7 +6,7 @@ if (!isset($_SESSION['msnv'])) {
   header('location:login.php');
   exit;
 }
-
+$title = "Cập nhật nhân viên";
 ?>
 <!DOCTYPE html>
 <html lang="en">

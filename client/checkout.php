@@ -22,7 +22,7 @@ $total_price = 0;
 <head>
   <?php
 
-  $title = "Đặt hàng";
+  $title = "Thông tin thanh toán";
   include_once('components/import_header.php');
 
   ?>

@@ -47,7 +47,7 @@ if (isset($_POST['update'])) {
 <head>
   <?php
 
-  $title = "Đặt hàng";
+  $title = "Tài khoản của tôi";
   include_once('components/import_header.php');
 
   ?>

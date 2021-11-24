@@ -7,8 +7,8 @@ if (isset($_SESSION['msnv'])) {
   header('location:index.php');
   exit;
 }
+$title = "Đăng nhập";
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 

@@ -7,6 +7,8 @@ if (!isset($_SESSION['msnv'])) {
     exit;
 }
 
+$title = "Cập nhật hàng hoá";
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

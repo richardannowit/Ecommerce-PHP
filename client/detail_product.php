@@ -6,7 +6,7 @@
   if (session_id() === '')
     session_start();
 
-  $title = "Chi tiết măt hàng";
+  $title = "Chi tiết hàng hoá";
   require('../database/connect.php');
   require('../database/repository.php');
   include_once('components/import_header.php');
